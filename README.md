@@ -11,10 +11,29 @@ I made it by symbolic linking to keep all updated
 [https://github.com/neovim/neovim](https://github.com/neovim/neovim)
 [Instructions summarized from here](https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites)
 
+First you need to install several preriquistes in Debian (most of them should be already installed),   
+
+```sh
 `apt-get install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip`
+```
 
-`git clone git@github.com:neovim/neovim.git`
+### Getting the source
+Now, get the source of neovim,   
 
+We can get the `master` by calling 
+```sh
+git clone git@github.com:neovim/neovim.git`
+```
+
+Or the `nightly` build that passes the automated build-tests
+
+```sh
+wget https://github.com/neovim/neovim/archive/nightly.zip
+```
+
+### Building
+
+#### Prerequisites
 First we need to compile the preriquisites,  
 
 ```sh
@@ -25,6 +44,7 @@ cmake ../third-party
 make   
 ```
 
+#### Building neovim
 Now at the source of `neovim` we can build it
 
 ```sh
@@ -33,6 +53,8 @@ cd build
 cmake ..   
 make    
 ```
+
+#### Installing (user only)
 
 Now install at `$HOME/neovim`
 
