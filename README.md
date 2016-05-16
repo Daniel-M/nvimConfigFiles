@@ -17,23 +17,29 @@ I made it by symbolic linking to keep all updated
 
 First we need to compile the preriquisites,  
 
-`cd neovim`   
-`mkdir .deps`   
-`cd .deps`   
-`cmake ../third-party`   
-`make`   
+```sh
+cd neovim   
+mkdir .deps   
+cd .deps   
+cmake ../third-party   
+make   
+```
 
 Now at the source of `neovim` we can build it
 
-`mkdir build`   
-`cd build`   
-`cmake ..`   
-`make`     
+```sh
+mkdir build   
+cd build   
+cmake ..   
+make    
+```
 
 Now install at `$HOME/neovim`
 
-`make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME/neovim"`   
-`make install`  
+```sh
+make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME/neovim"   
+make install  
+```
 
 In order to use the binary we have to add the `bin` subdir into our `$PATH`   
 
@@ -47,8 +53,10 @@ A workaround is to make a symbolic link at `/usr/local/bin` pointing to the bina
 
 Execute the following to get installed the `vim-plug` plugin manager for `Neovim`
 
-`curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`
+```sh
+curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
 
 Read the doc, is very well documented and clear.
 
