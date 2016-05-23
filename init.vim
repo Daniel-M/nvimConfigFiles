@@ -53,8 +53,14 @@ nmap \q :nohlsearch<CR>
 " KEYMAPPING
 " *************************************
 
+" commenting and uncommenting with NERDCommenter plugin
+nmap <C-c> \cc 
+vmap <C-c> \ci 
+nmap <C-x> \cu
+vmap <C-x> \cu
+
 "line numbers
-nmap \l :setlocal number!<CR>
+nmap \ln :setlocal number!<CR>
 
 "paste mode
 set pastetoggle=<F3>
