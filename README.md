@@ -37,12 +37,19 @@ wget https://github.com/neovim/neovim/archive/nightly.zip
 First we need to compile the preriquisites,  
 
 ```sh
+make deps 
+```
+
+This is a short hand for the set of instructions,
+
+```sh
 cd neovim   
 mkdir .deps   
 cd .deps   
 cmake ../third-party   
 make   
 ```
+
 
 #### Building neovim
 Now at the source of `neovim` we can build it
@@ -56,12 +63,23 @@ make
 
 #### Installing (user only)
 
-Now install at `$HOME/neovim`
+Now install at `$HOME/opt/neovim` (but read the note below)
 
 ```sh
-make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME/neovim"   
+make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME/opt/neovim"   
 make install  
 ```
+Note: It could happen that `make` still tries to make a whole system installation.
+To fix this issue you can do the following while inside the `build` path,   
+
+```sh
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$HOME/opt/neovim ..   
+make -j 4   
+make install     
+```
+This should fix it.
+
+##### Using nvim as regular binary
 
 In order to use the binary we have to add the `bin` subdir into our `$PATH`   
 
@@ -73,7 +91,7 @@ A workaround is to make a symbolic link at `/usr/local/bin` pointing to the bina
 ## Installing vim-plug
 [https://github.com/junegunn/vim-plug](https://github.com/junegunn/vim-plug)
 
-Execute the following to get installed the `vim-plug` plugin manager for `Neovim`
+`vim-plug` is a nice plugin manager for vim and neovim. To install it execute the following to get installed the `vim-plug` plugin manager for `Neovim`
 
 ```sh
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
@@ -82,7 +100,7 @@ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
 
 Read the doc, is very well documented and clear.
 
-It could happen that some plugins require you to execute,    
-`pip2 install neovim`    
-as `root` in Debian. `YouCompleteMe` is one of them.  
+## Some notes regarding Neovim behaviour
+
+ * It could happen that some plugins require you to execute, `pip2 install neovim` as `root` in Debian. `YouCompleteMe` is one of the plugins that have shown this behaviour.
 

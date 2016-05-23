@@ -1,0 +1,1 @@
+/home/damejia/.config/nvim/plugged/gocode/nvim/ftplugin/go/gocomplete.vim

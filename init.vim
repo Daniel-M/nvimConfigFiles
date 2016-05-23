@@ -5,15 +5,16 @@
 " PLUGIN SECTION
 " *************************************
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Make sure you use single quotes
 
-" On-demand loading
+" NERDTree plugin to have a nav-bar
+" On-demand loading when calling :NERDTreeToggle
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
 " Orgasmic commenting tool
-Plug 'https://github.com/scrooloose/nerdcommenter'
+Plug 'https://github.com/scrooloose/nerdcommenter', { 'tag': '*' }
 
 " Using a non-master branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
