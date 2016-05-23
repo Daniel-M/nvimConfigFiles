@@ -11,7 +11,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " NERDTree plugin to have a nav-bar
 " On-demand loading when calling :NERDTreeToggle
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' , 'tag': '*' }
 
 " Orgasmic commenting tool
 Plug 'https://github.com/scrooloose/nerdcommenter', { 'tag': '*' }
@@ -23,14 +23,14 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'https://github.com/fatih/vim-go', { 'tag': '*' }
 
 " Code to execute when the plugin is loaded on demand
-Plug 'Valloric/YouCompleteMe', { 'for': 'cpp' }
+Plug 'Valloric/YouCompleteMe', { 'for': 'cpp' , 'tag': '*' }
 autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
 
 " Syntax checker for nvim
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' , 'tag': '*' }
 
 " Syntaxtic replacement, since syntaxtic is not supported in nvim yet
-Plug 'https://github.com/neomake/neomake.git'
+Plug 'https://github.com/neomake/neomake.git', { 'tag': '*' }
 
 " Add plugins to &runtimepath
 call plug#end()
