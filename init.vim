@@ -27,7 +27,7 @@ Plug 'Valloric/YouCompleteMe', { 'for': 'cpp' , 'tag': '*' }
 autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
 
 " Syntax checker for nvim
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' , 'tag': '*' }
+Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh'}
 
 " Syntaxtic replacement, since syntaxtic is not supported in nvim yet
 Plug 'https://github.com/neomake/neomake.git', { 'tag': '*' }
