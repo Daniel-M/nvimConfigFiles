@@ -1,7 +1,9 @@
 " let g:python_host_prog = '/usr/bin/python2'
 " let g:python3_host_prog = '/usr/bin/python3'
 
+" *************************************
 " PLUGIN SECTION
+" *************************************
 
 call plug#begin('~/.vim/plugged')
 
@@ -9,6 +11,9 @@ call plug#begin('~/.vim/plugged')
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+" Orgasmic commenting tool
+Plug 'https://github.com/scrooloose/nerdcommenter'
 
 " Using a non-master branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
@@ -28,18 +33,24 @@ Plug 'https://github.com/neomake/neomake.git'
 
 " Add plugins to &runtimepath
 call plug#end()
-" End of plugin section
+
+" *************************************
+" END OF PLUGIN SECTION
+" *************************************
 
 "SEARCH AND HIGHLIGHTING
+
 set showmatch
 set incsearch
 set ignorecase
 set smartcase
 set hlsearch
+"hightlighting disabling
+nmap \q :nohlsearch<CR> 
 
-"
+" *************************************
 " KEYMAPPING
-"
+" *************************************
 
 "line numbers
 nmap \l :setlocal number!<CR>
