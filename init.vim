@@ -23,7 +23,8 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'https://github.com/fatih/vim-go', { 'tag': '*' }
 
 " Code to execute when the plugin is loaded on demand
-Plug 'Valloric/YouCompleteMe', { 'for': 'cpp' , 'tag': '*' }
+"Plug 'Valloric/YouCompleteMe', { 'for': 'cpp' , 'tag': '*' }
+Plug 'Valloric/YouCompleteMe', { 'tag': '*', 'do' : './install.py --clang-completer --gocode-completer' }
 autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
 
 " Syntax checker for nvim
