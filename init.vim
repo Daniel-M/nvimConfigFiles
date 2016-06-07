@@ -33,12 +33,21 @@ Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/sy
 " Syntaxtic replacement, since syntaxtic is not supported in nvim yet
 Plug 'https://github.com/neomake/neomake.git', { 'tag': '*' }
 
+" Sneak is a minimalist, versatile Vim motion plugin
+Plug 'https://github.com/justinmk/vim-sneak'
+
+" The colorscheme with neovim in mind.
+Plug 'https://github.com/freeo/vim-kalisi'
+
 " Add plugins to &runtimepath
 call plug#end()
 
 " *************************************
 " END OF PLUGIN SECTION
 " *************************************
+
+"hightlighting disabling
+nmap \q :nohlsearch<CR> 
 
 "SEARCH AND HIGHLIGHTING
 
@@ -47,8 +56,11 @@ set incsearch
 set ignorecase
 set smartcase
 set hlsearch
-"hightlighting disabling
-nmap \q :nohlsearch<CR> 
+
+ "Activating vim-kalisi colorscheme
+colorscheme kalisi
+"set background=light
+set background=dark
 
 " *************************************
 " KEYMAPPING
@@ -87,3 +99,4 @@ set completeopt+=preview
 "
 "english spell checking tested and working
 setlocal spell spelllang=en_us
+
