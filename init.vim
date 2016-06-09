@@ -23,8 +23,10 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'https://github.com/fatih/vim-go', { 'tag': '*' }
 
 " Code to execute when the plugin is loaded on demand
+" I want it to be compiled with python3 but the `do` command could be
+" changed to `do : ./install ...`
 "Plug 'Valloric/YouCompleteMe', { 'for': 'cpp' , 'tag': '*' }
-Plug 'Valloric/YouCompleteMe', { 'tag': '*', 'do' : './install.py --clang-completer --gocode-completer' }
+Plug 'Valloric/YouCompleteMe', { 'tag': '*', 'do' : 'python3 install.py --clang-completer --gocode-completer --system-boost' }
 "autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
 
 " Syntax checker for nvim

@@ -89,8 +89,11 @@ A workaround is to make a symbolic link at `/usr/local/bin` pointing to the bina
 
 
 ## Installing vim-plug
-[https://github.com/junegunn/vim-plug](https://github.com/junegunn/vim-plug)
 
+Checkout the repository at [https://github.com/junegunn/vim-plug](https://github.com/junegunn/vim-plug).   
+vim-plug is include by default here, just add a symbolic link of `autoload` to `$HOME/.config/nvim/autoload`   
+
+### If you wanna get the latest vim-plug
 `vim-plug` is a nice plugin manager for vim and neovim. To install it execute the following to get installed the `vim-plug` plugin manager for `Neovim`
 
 ```sh
