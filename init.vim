@@ -68,10 +68,13 @@ set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
 
+" Show mark at 80 chars length
+"set cc=80
+
  "Activating vim-kalisi colorscheme
-colorscheme kalisi
+colorscheme default 
 "set background=light
-set background=dark
+"set background=dark
 
 " *************************************
 " KEYMAPPING
