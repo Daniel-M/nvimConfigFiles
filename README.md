@@ -7,15 +7,17 @@ The contents of this repository must go into
 
 I made it by symbolic linking to keep all updated
 
-## Installing Neovim
+## Installing Neovim (Last tested October of 2016 with Nightly-Neovim)
 [https://github.com/neovim/neovim](https://github.com/neovim/neovim)
 [Instructions summarized from here](https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites)
 
 First you need to install several preriquistes in Debian (most of them should be already installed),   
 
 ```sh
-`apt-get install libtool libtool-bin autoconf automake cmake g++ pkg-config unzip`
+`apt-get install libtool libtool-bin autoconf automake cmake curl g++ pkg-config unzip
 ```
+
+
 
 ### Getting the source
 Now, get the source of neovim,   
