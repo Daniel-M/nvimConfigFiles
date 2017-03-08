@@ -23,11 +23,21 @@ First you need to install several preriquistes in Debian (most of them should be
 Now, get the source of neovim,   
 
 We can get the `master` by calling 
+
 ```sh
-git clone git@github.com:neovim/neovim.git`
+git clone git@github.com:neovim/neovim.git
 ```
 
-Or the `nightly` build that passes the automated build-tests
+You can check the lattest tag with `git tag` inside the cloned folder.
+
+The latest tag (as today) is `v0.1.7` so you can use
+
+```sh
+git checkout v0.1.7
+```
+To have the tag and build upon it.   
+
+The last opyion is to use the `nightly` build that passes the automated build-tests
 
 ```sh
 wget https://github.com/neovim/neovim/archive/nightly.zip
