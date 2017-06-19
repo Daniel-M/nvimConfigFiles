@@ -2,7 +2,7 @@
 " let g:python3_host_prog = '/usr/bin/python3'
 
 " *************************************
-" PLUGIN SECTION
+" PLUGIN SECTION for Vim-Plug
 " *************************************
 
 call plug#begin('~/.config/nvim/plugged')
@@ -68,17 +68,21 @@ call plug#end()
 " Start Deoplete plugin
 call deoplete#enable()
 
+" Snippets directory
+let g:UltiSnipsSnippetDirectories="~/.config/nvim/plugged/vim-snippets/UltiSnips"
+
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-let g:UltiSnipsSnippetDirectories="~/.config/nvim/plugged/vim-snippets/UltiSnips"
-
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-
+" To activate vimtex filetype detection.
+" The desired ft=tex, but somtimes neovim detects ft=plaintex
+" thus nothing related to vimtex works
+let g:tex_flavor = 'latex'
 " *************************************
 " END PLUGIN CONFIGURATION SECTION
 " *************************************
@@ -99,6 +103,9 @@ set incsearch
 set ignorecase
 set smartcase
 set hlsearch
+
+" Show line and column number in the status bar
+set ruler
 
 filetype plugin indent on
 " show existing tab with 4 spaces width
