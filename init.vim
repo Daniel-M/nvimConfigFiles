@@ -67,6 +67,25 @@ call plug#end()
 
 " Start Deoplete plugin
 call deoplete#enable()
+let g:deoplete#enable_at_startup = 1
+
+"""
+" Configure neomake
+"
+
+" Set log files
+let g:neomake_logfile = "/tmp/neomake.log"
+
+
+" When writing a buffer.
+call neomake#configure#automake('w')
+" When writing a buffer, and on normal mode changes (after 750ms).
+call neomake#configure#automake('nw', 750)
+" When reading a buffer (after 1s), and when writing.
+call neomake#configure#automake('rw', 1000)
+
+
+" Snippets configuration
 
 " Snippets directory
 let g:UltiSnipsSnippetDirectories="~/.config/nvim/plugged/vim-snippets/UltiSnips"
@@ -135,10 +154,13 @@ set spell spelllang=en
 " COLOR SCHEMES
 "
 
-"Activating vim-kalisi colorscheme
-colorscheme kalisi 
+"Activating freeo/vim-kalisi colorscheme
+"colorscheme kalisi 
+"set background=dark
 "set background=light
-set background=dark
+
+" flattened romainl/flattened colorscheme
+colorscheme flattened_dark
 
 set t_Co=256
 " in case t_Co alone doesn't work, add this as well:
