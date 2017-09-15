@@ -96,6 +96,7 @@ let g:tex_flavor = 'latex'
 "hightlighting disabling
 nmap \q :nohlsearch<CR> 
 
+"""""
 "SEARCH AND HIGHLIGHTING
 
 set showmatch
@@ -118,10 +119,31 @@ set expandtab
 " Show mark at 80 chars length
 "set cc=80
 
- "Activating vim-kalisi colorscheme
-colorscheme default 
+
+"
+" SET SPELL CHEKING ON, USEFUL WHEN WRITING STUFF
+"
+"spanish spell checking not tested
+"setlocal spell spelllang=es
+"
+"english spell checking tested and working
+"setlocal spell spelllang=en
+set spell spelllang=en
+
+
+"
+" COLOR SCHEMES
+"
+
+"Activating vim-kalisi colorscheme
+colorscheme kalisi 
 "set background=light
-"set background=dark
+set background=dark
+
+set t_Co=256
+" in case t_Co alone doesn't work, add this as well:
+"let &t_AB="\e[48;5;%dm"
+"let &t_AF="\e[38;5;%dm"
 
 " *************************************
 " KEYMAPPING
@@ -151,12 +173,3 @@ nmap <C-p> :bprev<CR>
 
 " YouCompleteMe enabling
 "set completeopt+=preview
-
-"
-" SET SPELL CHEKING ON, USEFUL WHEN WRITING STUFF
-"
-"spanish spell checking not tested
-"setlocal spell spelllang=es
-"
-"english spell checking tested and working
-setlocal spell spelllang=en
