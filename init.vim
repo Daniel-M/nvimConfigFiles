@@ -155,12 +155,12 @@ set spell spelllang=en
 "
 
 "Activating freeo/vim-kalisi colorscheme
-"colorscheme kalisi 
-"set background=dark
+colorscheme kalisi 
+set background=dark
 "set background=light
 
 " flattened romainl/flattened colorscheme
-colorscheme flattened_dark
+"colorscheme flattened_dark
 
 set t_Co=256
 " in case t_Co alone doesn't work, add this as well:
