@@ -20,7 +20,7 @@ Plug 'https://github.com/scrooloose/nerdcommenter', { 'tag': '*' }
 Plug 'https://github.com/justinmk/vim-sneak'
 
 " Mark indentation lines
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'nathanaelkane/vim-indent-guides'
 
 
 "" LANGUAGE SPECIFIC PLUGINS
@@ -175,7 +175,44 @@ let g:tex_flavor = 'latex'
 let g:airline_detect_spell=1
 "
 " Set the dark theme
-let g:airline_theme='dark'
+"let g:airline_theme='dark'
+let g:airline_theme='cool'
+
+"let g:airline_powerline_fonts = 1
+"if !exists('g:airline_symbols')
+  "let g:airline_symbols = {}
+"endif
+"let g:airline_symbols.space = "\ua0"
+
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#show_message = 1
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#right_sep = ' '
+let g:airline#extensions#tabline#right_alt_sep = '|'
+let g:airline_left_sep = ' '
+let g:airline_left_alt_sep = '|'
+let g:airline_right_sep = ' '
+let g:airline_right_alt_sep = '|'
+
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
+
+
 
 
 " *************************************
@@ -184,20 +221,29 @@ let g:airline_theme='dark'
 
 
 
+
 " *************************************
 " KEYMAPPING AND TWEAKING SECTION
 " *************************************
+" Recall that <leader> maps to "\" by default
+" so <leader>q means "\q"on a default installation
 
 " Actually delete characters when using the backspace
 set backspace=2
 
 "highlighting disabling
-nmap \q :nohlsearch<CR> 
+nmap <leader>q :nohlsearch<CR> 
 
 """""
 "SEARCH AND HIGHLIGHTING
 
+" Show matching brackets
 set showmatch
+" Show line numbers
+set number
+" Continue comment marker on new lines
+set formatoptions+=o
+
 set incsearch
 set ignorecase
 set smartcase
@@ -232,7 +278,7 @@ set mouse=a
 set laststatus=2
 
 " Show autocompletion of commands
-set wildmenu
+"set wildmenu
 
 
 "
@@ -262,27 +308,27 @@ set background=dark
 
 set t_Co=256
 " in case t_Co alone doesn't work, add this as well:
-"let &t_AB="\e[48;5;%dm"
-"let &t_AF="\e[38;5;%dm"
+"let &t_AB="<leader>e[48;5;%dm"
+"let &t_AF="<leader>e[38;5;%dm"
 
 " *************************************
 " KEYMAPPING
 " *************************************
 
 " commenting and uncommenting with NERDCommenter plugin
-nmap <C-c> \cc 
-vmap <C-c> \ci 
-nmap <C-x> \cu
-vmap <C-x> \cu
+nmap <C-c> <leader>cc 
+vmap <C-c> <leader>ci 
+nmap <C-x> <leader>cu
+vmap <C-x> <leader>cu
 
 "line numbers
-nmap \ln :setlocal number!<CR>
+nmap <leader>ln :setlocal number!<CR>
 
 "paste mode
 set pastetoggle=<F3>
 
 "NERD Tree
-nmap \nt :NERDTreeToggle<CR>
+nmap <leader>nt :NERDTreeToggle<CR>
 
 "buffer next and previous
 nmap <C-n> :bnext<CR>
