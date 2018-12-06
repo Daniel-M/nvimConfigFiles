@@ -21,15 +21,15 @@ Plug 'https://github.com/justinmk/vim-sneak'
 
 " Mark indentation lines
 "Plug 'nathanaelkane/vim-indent-guides'
-
+Plug 'Yggdroot/indentLine'
 
 "" LANGUAGE SPECIFIC PLUGINS
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'https://github.com/fatih/vim-go', { 'tag': '*' }
+Plug 'https://github.com/fatih/vim-go', { 'do': ':GoUpdateBinaries'}
 
 " GoLang Syntax checker for nvim
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh'}
+Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh >> /tmp/install_gocode.log 2>&1'}
 
 " Syntaxtic replacement, since syntaxtic is not supported in nvim yet
 Plug 'https://github.com/neomake/neomake.git'
@@ -40,6 +40,8 @@ Plug 'https://github.com/lervag/vimtex'
 " Deoplete - completion for Neovim
 "if has('nvim')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go'
+Plug 'Shougo/denite.nvim'
 "else
   "Plug 'Shougo/deoplete.nvim'
   "Plug 'roxma/nvim-yarp'
@@ -48,11 +50,10 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " TypeScript plugin for neovim
 " requires Deoplete
-Plug 'mhartington/nvim-typescript'
+"Plug 'mhartington/nvim-typescript'
 
 " TypeScript plugin for Vim
-"Plug 'leafgarland/typescript-vim'
-
+Plug 'leafgarland/typescript-vim'
 
 "" SNIPPETS PLUGIN
 
@@ -69,10 +70,10 @@ Plug 'https://github.com/pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
 " Plugin for eslint for JavaScript
-Plug 'mtscout6/syntastic-local-eslint.vim'
+"Plug 'mtscout6/syntastic-local-eslint.vim'
 
 " JavaScript linter for Vim
-"Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 
 "" COLOR SCHEMES PLUGIN
 
@@ -86,6 +87,9 @@ Plug 'https://github.com/icymind/neosolarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Silver searcher
+Plug 'https://github.com/gabesoft/vim-ags'
+
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -97,6 +101,11 @@ call plug#end()
 " *************************************
 " PLUGIN CONFIGURATION SECTION
 " *************************************
+
+"""
+" Configure vim-ag silver searcher
+"
+let g:ags_enable_async = 1
 
 """
 " Configure Deoplete 
@@ -135,7 +144,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-
 """
 " Configure mxw vim-jsx 
 
@@ -144,7 +152,7 @@ let g:jsx_ext_required = 0
 
 """
 " Enable indentation guides on startup (vim-indent-guides)
-let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_enable_on_vim_startup = 1
 
 """
 " Configure vimtex
@@ -256,12 +264,10 @@ filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
 " show existing tab with 4 spaces width
-"set tabstop=4
 set tabstop=2 "Parallelo configs
 " when indenting with '>', use 4 spaces width
-"set shiftwidth=4
 set shiftwidth=2 "Parallelo configs
-" On pressing tab, insert 4 spaces
+" On pressing tab, insert 2 spaces
 set expandtab
 
 " Show mark at 80 chars length
@@ -278,7 +284,7 @@ set mouse=a
 set laststatus=2
 
 " Show autocompletion of commands
-"set wildmenu
+set wildmenu
 
 
 "
@@ -337,6 +343,14 @@ nmap <C-p> :bprev<CR>
 "search with cotrlP
 "nmap ; :CtrlPBuffer<CR>
 
+inoremap , ,<space>
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
 
 """
 " Adding manual configuration for Prettier
