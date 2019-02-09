@@ -9,6 +9,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Make sure you use single quotes
 
+" Underline the words like the one under the cursor
+Plug 'zhou13/vim-cursorword'
+
 " NERDTree plugin to have a nav-bar
 " On-demand loading when calling :NERDTreeToggle
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' , 'tag': '*' }
@@ -32,7 +35,7 @@ Plug 'https://github.com/fatih/vim-go', { 'do': ':GoUpdateBinaries'}
 Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh >> /tmp/install_gocode.log 2>&1'}
 
 " Syntaxtic replacement, since syntaxtic is not supported in nvim yet
-Plug 'https://github.com/neomake/neomake.git'
+"Plug 'https://github.com/neomake/neomake.git'
 
 " Latex Plugin
 Plug 'https://github.com/lervag/vimtex'
@@ -43,9 +46,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go'
 Plug 'Shougo/denite.nvim'
 "else
-  "Plug 'Shougo/deoplete.nvim'
-  "Plug 'roxma/nvim-yarp'
-  "Plug 'roxma/vim-hug-neovim-rpc'
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'roxma/nvim-yarp'
+"Plug 'roxma/vim-hug-neovim-rpc'
 "endif
 
 " TypeScript plugin for neovim
@@ -54,6 +57,9 @@ Plug 'Shougo/denite.nvim'
 
 " TypeScript plugin for Vim
 Plug 'leafgarland/typescript-vim'
+
+" Vim syntax autoformatter
+"Plug 'Chiel92/vim-autoformat'
 
 "" SNIPPETS PLUGIN
 
@@ -80,7 +86,7 @@ Plug 'w0rp/ale'
 " The colorscheme with neovim in mind.
 Plug 'https://github.com/freeo/vim-kalisi'
 
-" Another solarized color theme for truecolor neovim 
+" Another solarized color theme for truecolor neovim
 Plug 'https://github.com/icymind/neosolarized'
 
 " Lean & mean status/tabline for vim that's light as air.
@@ -89,6 +95,15 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Silver searcher
 Plug 'https://github.com/gabesoft/vim-ags'
+
+" Git integration for vim
+Plug 'jreybert/vimagit'
+
+" Move Lines up or down without copying them
+Plug 'matze/vim-move'
+
+" Color matched parenthesis
+"Plug 'kien/rainbow_parentheses.vim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -108,7 +123,7 @@ call plug#end()
 let g:ags_enable_async = 1
 
 """
-" Configure Deoplete 
+" Configure Deoplete
 "
 " Start Deoplete plugin
 call deoplete#enable()
@@ -119,17 +134,17 @@ let g:deoplete#enable_profile = 1
 call deoplete#enable_logging('DEBUG', '/tmp/deoplete_neovim.log')
 
 
-"""
-" Configure neomake
-"
-" Set log files
-let g:neomake_logfile = "/tmp/neomake_neovim.log"
-" When writing a buffer.
-call neomake#configure#automake('w')
-" When writing a buffer, and on normal mode changes (after 750ms).
-call neomake#configure#automake('nw', 750)
-" When reading a buffer (after 1s), and when writing.
-call neomake#configure#automake('rw', 1000)
+""""
+"" Configure neomake
+""
+"" Set log files
+"let g:neomake_logfile = "/tmp/neomake_neovim.log"
+"" When writing a buffer.
+"call neomake#configure#automake('w')
+"" When writing a buffer, and on normal mode changes (after 750ms).
+"call neomake#configure#automake('nw', 750)
+"" When reading a buffer (after 1s), and when writing.
+"call neomake#configure#automake('rw', 1000)
 
 
 """
@@ -145,10 +160,14 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 """
-" Configure mxw vim-jsx 
+" Configure mxw vim-jsx
 
 " To allow .js extension for JSX syntax highlighting
 let g:jsx_ext_required = 0
+
+"""
+" Configure vim-autoformat
+"au BufWrite * :Autoformat
 
 """
 " Enable indentation guides on startup (vim-indent-guides)
@@ -162,24 +181,26 @@ let g:jsx_ext_required = 0
 " thus nothing related to vimtex works
 let g:tex_flavor = 'latex'
 
-""" 
+"""
 " ALE plugin configurations
 "
 " Enable completion where available.
-"let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 1
+"let g:ale_sign_error = '>>'
+"let g:ale_sign_warning = '--'
 "
 " Enable status bar messages. Set this,
 " Airline will handle the rest.
-"let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 "
 " Show 5 lines of errors (default: 10)
-"let g:ale_list_window_size = 5
+let g:ale_list_window_size = 5
 
 
 """
 " Configure vim-airline
 "
-" enable spell detection 
+" enable spell detection
 let g:airline_detect_spell=1
 "
 " Set the dark theme
@@ -188,7 +209,7 @@ let g:airline_theme='cool'
 
 "let g:airline_powerline_fonts = 1
 "if !exists('g:airline_symbols')
-  "let g:airline_symbols = {}
+"let g:airline_symbols = {}
 "endif
 "let g:airline_symbols.space = "\ua0"
 
@@ -197,6 +218,7 @@ let g:airline#extensions#whitespace#show_message = 1
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -220,8 +242,30 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
 
-
-
+"autocmd FileType agse,agsv RainbowParenthesesToggle
+"" Rainbow parenthesis configurations
+"au VimEnter * RainbowParenthesesToggle
+"au Syntax * RainbowParenthesesLoadRound
+"au Syntax * RainbowParenthesesLoadSquare
+"au Syntax * RainbowParenthesesLoadBraces
+""let g:rbpt_colorpairs = [
+""    \ ['brown',       'RoyalBlue3'],
+""    \ ['Darkblue',    'SeaGreen3'],
+""    \ ['darkgray',    'DarkOrchid3'],
+""    \ ['darkgreen',   'firebrick3'],
+""    \ ['darkcyan',    'RoyalBlue3'],
+""    \ ['darkred',     'SeaGreen3'],
+""    \ ['darkmagenta', 'DarkOrchid3'],
+""    \ ['brown',       'firebrick3'],
+""    \ ['gray',        'RoyalBlue3'],
+""    \ ['black',       'SeaGreen3'],
+""    \ ['darkmagenta', 'DarkOrchid3'],
+""    \ ['Darkblue',    'firebrick3'],
+""    \ ['darkgreen',   'RoyalBlue3'],
+""    \ ['darkcyan',    'SeaGreen3'],
+""    \ ['darkred',     'DarkOrchid3'],
+""    \ ['red',         'firebrick3'],
+""    \ ]
 
 " *************************************
 " END PLUGIN CONFIGURATION SECTION
@@ -239,8 +283,14 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 " Actually delete characters when using the backspace
 set backspace=2
 
+" Longer history
+set history=1000
+
 "highlighting disabling
-nmap <leader>q :nohlsearch<CR> 
+nmap <leader>q :nohlsearch<CR>
+
+" Save global marks on exit
+set viminfo='100,<50,s10,h
 
 """""
 "SEARCH AND HIGHLIGHTING
@@ -253,7 +303,8 @@ set number
 set formatoptions+=o
 
 set incsearch
-set ignorecase
+set noignorecase
+"set ignorecase
 set smartcase
 set hlsearch
 
@@ -263,12 +314,14 @@ set ruler
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
-" show existing tab with 4 spaces width
-set tabstop=2 "Parallelo configs
-" when indenting with '>', use 4 spaces width
-set shiftwidth=2 "Parallelo configs
-" On pressing tab, insert 2 spaces
+" expand tabs as spaces
 set expandtab
+" set the tab size to 2 spaces
+set tabstop=2 "Parallelo configs
+set shiftwidth=2 "Parallelo configs
+
+" Keep indenting as the previous line
+set autoindent
 
 " Show mark at 80 chars length
 set colorcolumn=80
@@ -277,7 +330,7 @@ set colorcolumn=80
 set textwidth=80
 
 " Allow mouse click enabled in terminal
-" mouse click places cursor there 
+" mouse click places cursor there
 set mouse=a
 
 " Show status bar
@@ -285,7 +338,14 @@ set laststatus=2
 
 " Show autocompletion of commands
 set wildmenu
+set wildmode=longest,list,full
+set completeopt=longest,menuone
 
+" Put the cursor to blink
+set guicursor=a:blinkon100
+
+" Keep 10 lines above or below the cursor to give more context
+set scrolloff=10
 
 "
 " SET SPELL CHEKING ON, USEFUL WHEN WRITING STUFF
@@ -303,7 +363,7 @@ set spell spelllang=en
 "
 
 "Activating freeo/vim-kalisi colorscheme
-colorscheme kalisi 
+colorscheme kalisi
 set background=dark
 "set background=light
 
@@ -322,8 +382,8 @@ set t_Co=256
 " *************************************
 
 " commenting and uncommenting with NERDCommenter plugin
-nmap <C-c> <leader>cc 
-vmap <C-c> <leader>ci 
+nmap <C-c> <leader>cc
+vmap <C-c> <leader>ci
 nmap <C-x> <leader>cu
 vmap <C-x> <leader>cu
 
@@ -332,6 +392,7 @@ nmap <leader>ln :setlocal number!<CR>
 
 "paste mode
 set pastetoggle=<F3>
+set nopaste
 
 "NERD Tree
 nmap <leader>nt :NERDTreeToggle<CR>
@@ -343,6 +404,8 @@ nmap <C-p> :bprev<CR>
 "search with cotrlP
 "nmap ; :CtrlPBuffer<CR>
 
+" Formatting mappings to insert double quotes
+" and enclosing simbols
 inoremap , ,<space>
 inoremap " ""<left>
 inoremap ' ''<left>
@@ -351,6 +414,27 @@ inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
+
+" Visual selection mappings
+" double quotes. If mappings above change,  this should change to c""<ESC>P
+vmap i" c"<ESC>p
+" single quotes. If mappings above change,  this should change to c''<ESC>P
+vmap i' c'<ESC>p
+vmap i( c(<ESC>p
+vmap i{ c{ <ESC>pi<right> <ESC>
+vmap i[ c[<ESC>p
+vmap i< c<><ESC>P
+"vmap i< c< <ESC>Pi<right> ><ESC>
+
+" buffer close
+nmap <C-b><C-d> :bd<Enter>
+
+" Show all pending TODO comments
+" using the silver searcher
+function! Todo()
+  :Ags TODO
+endfunction
+command Todo :call Todo()
 
 """
 " Adding manual configuration for Prettier
