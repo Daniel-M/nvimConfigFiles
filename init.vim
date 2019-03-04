@@ -196,6 +196,20 @@ let g:airline#extensions#ale#enabled = 1
 " Show 5 lines of errors (default: 10)
 let g:ale_list_window_size = 5
 
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint', 'prettier'],
+\}
+
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
+let g:ale_linters = {'jsx': ['stylelint', 'eslint', 'jslint']}
+
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 0
+
+" Enable completion where available.
+" This setting must be set before ALE is loaded.
+let g:ale_completion_enabled = 1
 
 """
 " Configure vim-airline
@@ -383,8 +397,8 @@ set t_Co=256
 
 " commenting and uncommenting with NERDCommenter plugin
 nmap <C-c> <leader>cc
-vmap <C-c> <leader>ci
 nmap <C-x> <leader>cu
+vmap <C-c> <leader>cc
 vmap <C-x> <leader>cu
 
 "line numbers
@@ -432,9 +446,16 @@ nmap <C-b><C-d> :bd<Enter>
 " Show all pending TODO comments
 " using the silver searcher
 function! Todo()
-  :Ags TODO
+:Ags TODO
 endfunction
 command Todo :call Todo()
+
+" For local word replace in between {}
+"nmap <leader>lr gd[{V%::s/<C-R>///gc<left><left><left>
+nmap <leader>lr b"ryiw[{V%:s/<C-R>r//gc<left><left><left>
+
+" For global word replace
+nmap <leader>gr b"ryiw:%s/<C-R>r//gc<left><left><left>
 
 """
 " Adding manual configuration for Prettier
