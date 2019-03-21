@@ -461,7 +461,7 @@ command Todo :call Todo()
 nmap <leader>lr b"ryiw[{V%:s/<C-R>r//gc<left><left><left>
 
 " For global word replace
-nmap <leader>gr b"ryiw[{V%:s/<C-R>r//gc<left><left><left>
+nmap <leader>gr b"ryiw:%s/<C-R>r//gc<left><left><left> 
 
 " Search the current word in the workspace
 nmap <F6> b"ryiw:Ags<C-R><left><space><CR>
