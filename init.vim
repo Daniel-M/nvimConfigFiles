@@ -396,9 +396,11 @@ set t_Co=256
 " *************************************
 
 " commenting and uncommenting with NERDCommenter plugin
-nmap <C-c> <leader>cc
+"nmap <C-c> <leader>cc
+nmap <C-c> <leader>ci
 nmap <C-x> <leader>cu
-vmap <C-c> <leader>cc
+"vmap <C-c> <leader>cc
+vmap <C-c> <leader>ci
 vmap <C-x> <leader>cu
 
 "line numbers
@@ -414,6 +416,10 @@ nmap <leader>nt :NERDTreeToggle<CR>
 "buffer next and previous
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
+
+"tabs next and previous
+nmap <F2> :tabnext<CR>
+nmap <F4> :tabprevious<CR>
 
 "search with cotrlP
 "nmap ; :CtrlPBuffer<CR>
@@ -455,7 +461,10 @@ command Todo :call Todo()
 nmap <leader>lr b"ryiw[{V%:s/<C-R>r//gc<left><left><left>
 
 " For global word replace
-nmap <leader>gr b"ryiw:%s/<C-R>r//gc<left><left><left>
+nmap <leader>gr b"ryiw[{V%:s/<C-R>r//gc<left><left><left>
+
+" Search the current word in the workspace
+nmap <F6> b"ryiw:Ags<C-R><left><space><CR>
 
 """
 " Adding manual configuration for Prettier
