@@ -458,13 +458,13 @@ command Todo :call Todo()
 
 " For local word replace in between {}
 "nmap <leader>lr gd[{V%::s/<C-R>///gc<left><left><left>
-nmap <leader>lr b"ryiw[{V%:s/<C-R>r//gc<left><left><left>
+nmap <leader>lr wb"ryiw[{V%:s/<C-R>r//gc<left><left><left>
 
 " For global word replace
-nmap <leader>gr b"ryiw:%s/<C-R>r//gc<left><left><left> 
+nmap <leader>gr wb"ryiw:%s/<C-R>r//gc<left><left><left>
 
 " Search the current word in the workspace
-nmap <F6> b"ryiw:Ags<C-R><left><space><CR>
+nmap <F6> wb"ryiw:Ags<space><C-R>r<CR>
 
 """
 " Adding manual configuration for Prettier
