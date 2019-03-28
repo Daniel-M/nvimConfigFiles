@@ -417,9 +417,12 @@ nmap <leader>nt :NERDTreeToggle<CR>
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
 
+" Open a new tab 
+nmap <C-b><C-t> :tabnew<CR>
+
 "tabs next and previous
-nmap <F2> :tabnext<CR>
 nmap <F4> :tabprevious<CR>
+nmap <F6> :tabnext<CR>
 
 "search with cotrlP
 "nmap ; :CtrlPBuffer<CR>
@@ -464,7 +467,7 @@ nmap <leader>lr wb"ryiw[{V%:s/<C-R>r//gc<left><left><left>
 nmap <leader>gr wb"ryiw:%s/<C-R>r//gc<left><left><left>
 
 " Search the current word in the workspace
-nmap <F6> wb"ryiw:Ags<space><C-R>r<CR>
+nmap <F2> wb"ryiw:Ags<space><C-R>r<CR>
 
 """
 " Adding manual configuration for Prettier
