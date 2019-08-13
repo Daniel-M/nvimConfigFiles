@@ -40,26 +40,44 @@ Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/
 " Latex Plugin
 Plug 'https://github.com/lervag/vimtex'
 
+
+""Plug 'ncm2/ncm2'
+""Plug 'roxma/nvim-yarp'
+""" NOTE: you need to install completion sources to get completions. Check
+""" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
+""Plug 'ncm2/ncm2-bufword'
+""Plug 'ncm2/ncm2-path'
+""
+""Plug 'ncm2/ncm2-ultisnips'
+""
+""Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+""
+""Plug 'HerringtonDarkholme/yats.vim'
+""Plug 'ncm2/nvim-typescript', {'do': './install.sh'}
+""
+""Plug 'ncm2/ncm2-jedi'
+""
+""Plug 'ncm2/ncm2-go'
+
+" Yoink Plugin
+Plug 'svermeulen/vim-yoink'
+
 " Deoplete - completion for Neovim
-"if has('nvim')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go'
 Plug 'Shougo/denite.nvim'
-"else
-"Plug 'Shougo/deoplete.nvim'
-"Plug 'roxma/nvim-yarp'
-"Plug 'roxma/vim-hug-neovim-rpc'
-"endif
 
-" TypeScript plugin for neovim
-" requires Deoplete
-"Plug 'mhartington/nvim-typescript'
+"" TypeScript plugin for neovim
+"" requires Deoplete
+Plug 'mhartington/nvim-typescript'
+
+"" vim-prettier
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 " TypeScript plugin for Vim
-Plug 'leafgarland/typescript-vim'
-
-" Vim syntax autoformatter
-"Plug 'Chiel92/vim-autoformat'
+"Plug 'leafgarland/typescript-vim'
 
 "" SNIPPETS PLUGIN
 
@@ -67,10 +85,10 @@ Plug 'leafgarland/typescript-vim'
 Plug 'https://github.com/honza/vim-snippets'
 
 " Utilsnips
-Plug 'https://github.com/SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 " JavaScript autocompletion
-Plug 'https://github.com/pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 
 " JSX Syntax highlighting depends upon pangloss/vim-javascript
 Plug 'mxw/vim-jsx'
@@ -105,6 +123,10 @@ Plug 'matze/vim-move'
 " Color matched parenthesis
 "Plug 'kien/rainbow_parentheses.vim'
 
+"Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+"Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -125,14 +147,40 @@ let g:ags_enable_async = 1
 """
 " Configure Deoplete
 "
-" Start Deoplete plugin
+"" Start Deoplete plugin
 call deoplete#enable()
 let g:deoplete#enable_at_startup = 1
-" Required by typescript in Neovim
+"" Required by typescript in Neovim
 let g:deoplete#enable_debug = 1
 let g:deoplete#enable_profile = 1
 call deoplete#enable_logging('DEBUG', '/tmp/deoplete_neovim.log')
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+  "\ 'tern#Complete',
+  \ 'jspc#omni'
+\]
 
+"set completeopt=longest,menuone,preview
+set completeopt=longest,menuone
+let g:deoplete#sources = {}
+"let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
+let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips']
+"let g:tern#command = ['tern']
+"let g:tern#arguments = ['--persistent']
+
+"" Integration of ALE with deoplete
+call deoplete#custom#option('sources', { '_': ['ale'] })
+
+
+autocmd FileType jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" close the preview window when you're not using it
+let g:SuperTabClosePreviewOnPopupClose = 1
+" or just disable the preview entirely
+"set completeopt-=preview
 
 """"
 "" Configure neomake
@@ -153,21 +201,21 @@ call deoplete#enable_logging('DEBUG', '/tmp/deoplete_neovim.log')
 " Snippets directory
 "let g:UltiSnipsSnippetDirectories="~/.config/nvim/plugged/vim-snippets/UltiSnips"
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+"ncm2
+"let g:UltiSnipsRemoveSelectModeMappings = 0
 
 """
 " Configure mxw vim-jsx
 
 " To allow .js extension for JSX syntax highlighting
 let g:jsx_ext_required = 0
-
-"""
-" Configure vim-autoformat
-"au BufWrite * :Autoformat
 
 """
 " Enable indentation guides on startup (vim-indent-guides)
@@ -185,7 +233,11 @@ let g:tex_flavor = 'latex'
 " ALE plugin configurations
 "
 " Enable completion where available.
-let g:ale_completion_enabled = 1
+" This setting must be set before ALE is loaded.
+"
+" You should not turn this setting on if you wish to use ALE as a completion
+" source for other completion plugins, like Deoplete.
+"let g:ale_completion_enabled = 1
 "let g:ale_sign_error = '>>'
 "let g:ale_sign_warning = '--'
 "
@@ -206,10 +258,11 @@ let g:ale_linters = {'jsx': ['stylelint', 'eslint', 'jslint']}
 
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 0
+let g:prettier#exec_cmd_async = 1
 
-" Enable completion where available.
-" This setting must be set before ALE is loaded.
-let g:ale_completion_enabled = 1
+"" Uncomment to execute prettier when saving buffers
+"let g:prettier#autoformat = 0
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 """
 " Configure vim-airline
@@ -255,6 +308,13 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
+
+"" Yoink
+nmap <A-n> <plug>(YoinkPostPasteSwapBack)
+nmap <A-p> <plug>(YoinkPostPasteSwapForward)
+
+nmap p <plug>(YoinkPaste_p)
+nmap P <plug>(YoinkPaste_P)
 
 "autocmd FileType agse,agsv RainbowParenthesesToggle
 "" Rainbow parenthesis configurations
@@ -341,7 +401,7 @@ set autoindent
 set colorcolumn=80
 
 " Word wrapping
-set textwidth=80
+"set textwidth=80
 
 " Allow mouse click enabled in terminal
 " mouse click places cursor there
@@ -353,7 +413,8 @@ set laststatus=2
 " Show autocompletion of commands
 set wildmenu
 set wildmode=longest,list,full
-set completeopt=longest,menuone
+"" This was already set above
+"set completeopt=longest,menuone
 
 " Put the cursor to blink
 set guicursor=a:blinkon100
