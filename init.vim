@@ -156,9 +156,12 @@ let g:deoplete#enable_profile = 1
 call deoplete#enable_logging('DEBUG', '/tmp/deoplete_neovim.log')
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
-  "\ 'tern#Complete',
   \ 'jspc#omni'
 \]
+"let g:deoplete#omni#functions.javascript = [
+  "\ 'tern#Complete',
+  "\ 'jspc#omni'
+"\]
 
 "set completeopt=longest,menuone,preview
 set completeopt=longest,menuone
