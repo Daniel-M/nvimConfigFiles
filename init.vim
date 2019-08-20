@@ -9,38 +9,113 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Make sure you use single quotes
 
-" Underline the words like the one under the cursor
-Plug 'zhou13/vim-cursorword'
-
-" NERDTree plugin to have a nav-bar
-" On-demand loading when calling :NERDTreeToggle
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' , 'tag': '*' }
-
-" Orgasmic commenting tool
-Plug 'https://github.com/scrooloose/nerdcommenter', { 'tag': '*' }
-
-" Sneak is a minimalist, versatile Vim motion plugin
-Plug 'https://github.com/justinmk/vim-sneak'
-
-" Mark indentation lines
-"Plug 'nathanaelkane/vim-indent-guides'
-Plug 'Yggdroot/indentLine'
-
-"" LANGUAGE SPECIFIC PLUGINS
+""
+""
+"" Golang plugins 
+""
+""
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'https://github.com/fatih/vim-go', { 'do': ':GoUpdateBinaries'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'}
 
 " GoLang Syntax checker for nvim
 Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh >> /tmp/install_gocode.log 2>&1'}
 
-" Syntaxtic replacement, since syntaxtic is not supported in nvim yet
-"Plug 'https://github.com/neomake/neomake.git'
+""
+""
+"" SNIPPETS PLUGIN
+""
+""
 
-" Latex Plugin
-Plug 'https://github.com/lervag/vimtex'
+" Utilsnips
+Plug 'SirVer/ultisnips'
+
+" Snippets for Utilsnips
+Plug 'honza/vim-snippets'
+
+""
+""
+"" Visuals, Color schemes, colored utilities, Status Bar,  Themes
+""
+""
+
+" The colorscheme with neovim in mind.
+Plug 'freeo/vim-kalisi'
+
+" Another solarized color theme for truecolor neovim
+Plug 'icymind/neosolarized'
+
+" Lean & mean status/tabline for vim that's light as air.
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Mark indentation lines
+Plug 'Yggdroot/indentLine'
+
+" Color matched parenthesis
+"Plug 'kien/rainbow_parentheses.vim'
 
 
+""
+""
+"" JavaScript, Node, React, TypeScript 
+""
+""
+
+"" vim-prettier
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+
+"" TypeScript plugin for neovim
+"" requires Deoplete
+Plug 'mhartington/nvim-typescript'
+
+" JavaScript autocompletion
+Plug 'pangloss/vim-javascript'
+
+" JSX Syntax highlighting depends upon pangloss/vim-javascript
+Plug 'mxw/vim-jsx'
+
+" Plugin for eslint for JavaScript
+"Plug 'mtscout6/syntastic-local-eslint.vim'
+
+" Asynch Linter Eginge for vim/neovim
+Plug 'w0rp/ale'
+
+"" Javascript function parameter autocompletion engine
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+
+"Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+"Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+
+""
+""
+""
+"" Python
+""
+
+"" This requires jedi installed
+Plug 'zchee/deoplete-jedi'
+
+"" Jump to definition in another buffer 
+Plug 'davidhalter/jedi-vim'
+
+""
+""
+"" Autocompletion Engines
+""
+""
+
+" Deoplete - completion for Neovim
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go'
+Plug 'Shougo/denite.nvim'
+
+" Auto formater
+Plug 'sbdchd/neoformat'
+
+""" Another completion engine
 ""Plug 'ncm2/ncm2'
 ""Plug 'roxma/nvim-yarp'
 """ NOTE: you need to install completion sources to get completions. Check
@@ -59,60 +134,20 @@ Plug 'https://github.com/lervag/vimtex'
 ""
 ""Plug 'ncm2/ncm2-go'
 
-" Yoink Plugin
-Plug 'svermeulen/vim-yoink'
+""
+""
+"" Utilities and stuff
+""
+""
 
-" Deoplete - completion for Neovim
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-go'
-Plug 'Shougo/denite.nvim'
-
-"" TypeScript plugin for neovim
-"" requires Deoplete
-Plug 'mhartington/nvim-typescript'
-
-"" vim-prettier
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-
-" TypeScript plugin for Vim
-"Plug 'leafgarland/typescript-vim'
-
-"" SNIPPETS PLUGIN
-
-" Snippets for Utilsnips
-Plug 'https://github.com/honza/vim-snippets'
-
-" Utilsnips
-Plug 'SirVer/ultisnips'
-
-" JavaScript autocompletion
-Plug 'pangloss/vim-javascript'
-
-" JSX Syntax highlighting depends upon pangloss/vim-javascript
-Plug 'mxw/vim-jsx'
-
-" Plugin for eslint for JavaScript
-"Plug 'mtscout6/syntastic-local-eslint.vim'
-
-" JavaScript linter for Vim
-Plug 'w0rp/ale'
-
-"" COLOR SCHEMES PLUGIN
-
-" The colorscheme with neovim in mind.
-Plug 'https://github.com/freeo/vim-kalisi'
-
-" Another solarized color theme for truecolor neovim
-Plug 'https://github.com/icymind/neosolarized'
-
-" Lean & mean status/tabline for vim that's light as air.
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Multicursor like Sublime (Multiline variable edit)
+Plug 'terryma/vim-multiple-cursors'
 
 " Silver searcher
-Plug 'https://github.com/gabesoft/vim-ags'
+Plug 'gabesoft/vim-ags'
+
+" Auto pairs
+Plug 'jiangmiao/auto-pairs'
 
 " Git integration for vim
 Plug 'jreybert/vimagit'
@@ -120,12 +155,30 @@ Plug 'jreybert/vimagit'
 " Move Lines up or down without copying them
 Plug 'matze/vim-move'
 
-" Color matched parenthesis
-"Plug 'kien/rainbow_parentheses.vim'
+" Neomake is a plugin for Vim/Neovim to asynchronously run programs 
+Plug 'neomake/neomake'
 
-"Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
-"Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+" Latex Plugin
+Plug 'lervag/vimtex'
+
+" Yoink Plugin
+Plug 'svermeulen/vim-yoink'
+
+" Visuals about Yanks
+Plug 'machakann/vim-highlightedyank'
+
+" Underline the words like the one under the cursor
+Plug 'zhou13/vim-cursorword'
+
+" NERDTree plugin to have a nav-bar
+" On-demand loading when calling :NERDTreeToggle
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' , 'tag': '*' }
+
+" Orgasmic commenting tool
+Plug 'scrooloose/nerdcommenter', { 'tag': '*' }
+
+" Sneak is a minimalist, versatile Vim motion plugin
+Plug 'justinmk/vim-sneak'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -189,14 +242,30 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 "" Configure neomake
 ""
 "" Set log files
-"let g:neomake_logfile = "/tmp/neomake_neovim.log"
+let g:neomake_logfile = "/tmp/neomake_neovim.log"
 "" When writing a buffer.
-"call neomake#configure#automake('w')
+" call neomake#configure#automake('w')
 "" When writing a buffer, and on normal mode changes (after 750ms).
-"call neomake#configure#automake('nw', 750)
+call neomake#configure#automake('nw', 750)
 "" When reading a buffer (after 1s), and when writing.
-"call neomake#configure#automake('rw', 1000)
+" call neomake#configure#automake('rw', 1000)
+"" 
+" call neomake#configure#automake('nrwi', 500)
 
+let g:neomake_python_enabled_makers = ['pylint']
+
+"" Configure jedi-vim
+" disable autocompletion, cause we use deoplete for completion
+let g:jedi#completions_enabled = 0
+
+" open the go-to function in split, not another buffer
+let g:jedi#use_splits_not_buffers = "right"
+
+" disable autocompletion, cause we use deoplete for completion
+let g:jedi#completions_enabled = 0
+
+" open the go-to function in split, not another buffer
+let g:jedi#use_splits_not_buffers = "right"
 
 """
 " Configure UltiSnips - Snippets
@@ -224,6 +293,10 @@ let g:jsx_ext_required = 0
 " Enable indentation guides on startup (vim-indent-guides)
 "let g:indent_guides_enable_on_vim_startup = 1
 
+"" Yggdroot indent lines different at different levels
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" let g:indentLine_char = 'c'
+
 """
 " Configure vimtex
 "
@@ -244,8 +317,8 @@ let g:tex_flavor = 'latex'
 "let g:ale_sign_error = '>>'
 "let g:ale_sign_warning = '--'
 "
-" Enable status bar messages. Set this,
-" Airline will handle the rest.
+" Enable ALE status bar messages integrated with vim-airline. 
+" Set this, Airline will handle the rest.
 let g:airline#extensions#ale#enabled = 1
 "
 " Show 5 lines of errors (default: 10)
@@ -312,12 +385,48 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
 
+""
 "" Yoink
+""
+set shada=!,\'100,<100,s100,h
+let g:yoinkSavePersistently = 1 "" Use the SHAred DAta (SHADA) of nvim
+let g:yoinkMaxItems = 20
+let g:yoinkSyncNumberedRegisters = 1
+let g:yoinkIncludeDeleteOperations = 1
+
 nmap <A-n> <plug>(YoinkPostPasteSwapBack)
 nmap <A-p> <plug>(YoinkPostPasteSwapForward)
 
 nmap p <plug>(YoinkPaste_p)
 nmap P <plug>(YoinkPaste_P)
+
+""" Configure yank coloring timeout
+let g:highlightedyank_highlight_duration = 2000
+
+"" Configure Nerdcommenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
 
 "autocmd FileType agse,agsv RainbowParenthesesToggle
 "" Rainbow parenthesis configurations
@@ -366,8 +475,10 @@ set history=1000
 "highlighting disabling
 nmap <leader>q :nohlsearch<CR>
 
-" Save global marks on exit
-set viminfo='100,<50,s10,h
+" Save global marks on exit.
+" This has been superseded by shada,
+" look below with yoink
+" set viminfo='100,<100,s100,h
 
 """""
 "SEARCH AND HIGHLIGHTING
@@ -460,11 +571,10 @@ set t_Co=256
 " *************************************
 
 " commenting and uncommenting with NERDCommenter plugin
-"nmap <C-c> <leader>cc
-nmap <C-c> <leader>ci
+nmap <C-c> <leader>cc
 nmap <C-x> <leader>cu
-"vmap <C-c> <leader>cc
-vmap <C-c> <leader>ci
+vmap <C-c> <leader>cc
+" vmap <C-c> <leader>ci
 vmap <C-x> <leader>cu
 
 "line numbers
@@ -493,14 +603,14 @@ nmap <F6> :tabnext<CR>
 
 " Formatting mappings to insert double quotes
 " and enclosing simbols
-inoremap , ,<space>
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
+""inoremap , ,<space>
+""inoremap " ""<left>
+""inoremap ' ''<left>
+""inoremap ( ()<left>
+""inoremap [ []<left>
+""inoremap { {}<left>
+""inoremap {<CR> {<CR>}<ESC>O
+""inoremap {;<CR> {<CR>};<ESC>O
 
 " Visual selection mappings
 " double quotes. If mappings above change,  this should change to c""<ESC>P
