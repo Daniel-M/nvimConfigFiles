@@ -207,26 +207,24 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_debug = 1
 let g:deoplete#enable_profile = 1
 call deoplete#enable_logging('DEBUG', '/tmp/deoplete_neovim.log')
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-  \ 'jspc#omni'
-\]
-"let g:deoplete#omni#functions.javascript = [
-  "\ 'tern#Complete',
-  "\ 'jspc#omni'
-"\]
+" let g:deoplete#omni#functions = {}
+" let g:deoplete#omni#functions.javascript = [
+  " \ 'jspc#omni'
+" \]
 
 "set completeopt=longest,menuone,preview
 set completeopt=longest,menuone
-let g:deoplete#sources = {}
-"let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
-let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips']
-"let g:tern#command = ['tern']
-"let g:tern#arguments = ['--persistent']
+" let g:deoplete#sources = {}
+" let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips']
 
 "" Integration of ALE with deoplete
-call deoplete#custom#option('sources', { '_': ['ale'] })
-
+" call deoplete#custom#option('sources', {
+" \ '_': ['ale'],
+" \})
+" call deoplete#custom#option('sources', {
+" \ '_': ['ale'],
+" \ 'javascript.jsx': ['file', 'ultisnips'],
+" \})
 
 autocmd FileType jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
@@ -237,6 +235,37 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 let g:SuperTabClosePreviewOnPopupClose = 1
 " or just disable the preview entirely
 "set completeopt-=preview
+
+""""""" Configure Denite
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
+
+""""""" Configure multicursor 
+let g:multi_cursor_use_default_mapping=0
+
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-m>'
+let g:multi_cursor_select_all_word_key = '<A-m>'
+let g:multi_cursor_start_key           = 'g<C-m>'
+let g:multi_cursor_select_all_key      = 'g<A-m>'
+let g:multi_cursor_next_key            = '<C-m>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
 
 """"
 "" Configure neomake
@@ -261,9 +290,6 @@ let g:jedi#completions_enabled = 0
 " open the go-to function in split, not another buffer
 let g:jedi#use_splits_not_buffers = "right"
 
-" disable autocompletion, cause we use deoplete for completion
-let g:jedi#completions_enabled = 0
-
 " open the go-to function in split, not another buffer
 let g:jedi#use_splits_not_buffers = "right"
 
@@ -273,8 +299,8 @@ let g:jedi#use_splits_not_buffers = "right"
 " Snippets directory
 "let g:UltiSnipsSnippetDirectories="~/.config/nvim/plugged/vim-snippets/UltiSnips"
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
@@ -313,6 +339,7 @@ let g:tex_flavor = 'latex'
 "
 " You should not turn this setting on if you wish to use ALE as a completion
 " source for other completion plugins, like Deoplete.
+let g:ale_completion_enabled = 0
 "let g:ale_completion_enabled = 1
 "let g:ale_sign_error = '>>'
 "let g:ale_sign_warning = '--'
@@ -394,14 +421,24 @@ let g:yoinkMaxItems = 20
 let g:yoinkSyncNumberedRegisters = 1
 let g:yoinkIncludeDeleteOperations = 1
 
-nmap <A-n> <plug>(YoinkPostPasteSwapBack)
-nmap <A-p> <plug>(YoinkPostPasteSwapForward)
+nmap <A-p> <plug>(YoinkPostPasteSwapBack)
+nmap <A-n> <plug>(YoinkPostPasteSwapForward)
 
 nmap p <plug>(YoinkPaste_p)
 nmap P <plug>(YoinkPaste_P)
 
 """ Configure yank coloring timeout
-let g:highlightedyank_highlight_duration = 2000
+let g:highlightedyank_highlight_duration = 220
+
+""" Configure Autopairs
+" AutoPairsShortcutToggle
+" Default: '<M-p>'
+let g:AutoPairsShortcutJump = ''
+let g:AutoPairsShortcutToggle = ''
+" The shortcut to toggle autopairs.
+" Default: '<M-e>'
+let g:AutoPairsShortcutFastWrap = ''
+
 
 "" Configure Nerdcommenter
 " Add spaces after comment delimiters by default

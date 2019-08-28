@@ -7,7 +7,6 @@ The contents of this repository must go into `.config/nvim/`,
 git clone git@github.com:Daniel-M/nvimConfigFiles.git ~/.config/nvim
 ```
 
-
 ## Installing Neovim (Last tested June the 12, 2018 with master branch of Neovim)
 [https://github.com/neovim/neovim](https://github.com/neovim/neovim)
 [Instructions summarized from here](https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites)
