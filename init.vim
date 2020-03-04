@@ -71,14 +71,15 @@ Plug 'Yggdroot/indentLine'
 "" requires Deoplete
 " Plug 'mhartington/nvim-typescript'
 
-" JavaScript autocompletion
-" Plug 'pangloss/vim-javascript'
 
 " JavaScript autocompletion for ReactJS
 " Plug 'chemzqm/vim-jsx-improve'
 
+" JavaScript autocompletion
+Plug 'pangloss/vim-javascript'
+
 " JSX Syntax highlighting depends upon pangloss/vim-javascript
-" Plug 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx'
 
 
 " Plugin for eslint for JavaScript
@@ -162,7 +163,7 @@ Plug 'terryma/vim-multiple-cursors'
 " Plug 'jreybert/vimagit'
 
 " Move Lines up or down without copying them
-" Plug 'matze/vim-move'
+Plug 'matze/vim-move'
 
 " Neomake is a plugin for Vim/Neovim to asynchronously run programs 
 " Plug 'neomake/neomake'
