@@ -1,6 +1,14 @@
 # nvimConfigFiles
 My configurations to get NeoVim up an running in my machine.   
 
+## COC.NVIM
+When in normal mode just this command once,
+
+```
+CocInstall coc-tsserver coc-stylelint coc-json coc-python coc-prettier coc-html coc-css coc-eslint coc-yaml coc-ultisnips coc-gocode coc-highlight coc-snippets coc-yank coc-pairs coc-markdownlint coc-explorer
+```
+
+
 The contents of this repository must go into `.config/nvim/`,
 
 ```
