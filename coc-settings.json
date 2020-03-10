@@ -1,0 +1,6 @@
+{
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.snippetIndicator": "►",
+  "suggest.echodocSupport": true,
+  "eslint.packageManager": "npm"
+}
