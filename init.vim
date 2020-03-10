@@ -28,7 +28,7 @@ call plug#begin('~/.config/nvim/plugged')
 ""
 
 " Utilsnips
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 
 " Snippets for Utilsnips
 Plug 'honza/vim-snippets'
@@ -86,7 +86,7 @@ Plug 'mxw/vim-jsx'
 "Plug 'mtscout6/syntastic-local-eslint.vim'
 
 " Asynch Linter Enginge for vim/neovim
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 "" Javascript function parameter autocompletion engine
 " Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -120,7 +120,7 @@ Plug 'neoclide/coc-denite'
 " Deoplete - completion for Neovim
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'zchee/deoplete-go'
-Plug 'Shougo/denite.nvim'
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Auto formater
 " Plug 'sbdchd/neoformat'
@@ -288,18 +288,18 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " open the go-to function in split, not another buffer
 " let g:jedi#use_splits_not_buffers = "right"
 
-"""
-" Configure UltiSnips - Snippets
-"
-" Snippets directory
-"let g:UltiSnipsSnippetDirectories="~/.config/nvim/plugged/vim-snippets/UltiSnips"
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+" """
+" " Configure UltiSnips - Snippets
+" "
+" " Snippets directory
+" "let g:UltiSnipsSnippetDirectories="~/.config/nvim/plugged/vim-snippets/UltiSnips"
+" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+" " let g:UltiSnipsExpandTrigger="<C-j>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" " If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
 
 "ncm2
 "let g:UltiSnipsRemoveSelectModeMappings = 0
@@ -627,6 +627,18 @@ set nopaste
 " nmap <space>e :CocCommand explorer<CR>
 nmap <leader>et :CocCommand explorer<CR>
 
+"""
+""" netrw built-in explorer configured to look like nerdtree
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 15
+" augroup ProjectDrawer
+  " autocmd!
+  " autocmd VimEnter * :Vexplore
+" augroup END
+
 "buffer next and previous
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
@@ -767,6 +779,9 @@ endfunction
 " COC configuration
 " Taken from https://github.com/neoclide/coc.nvim
 " TextEdit might fail if hidden is not set.
+
+let g:coc_global_extension = ["coc-tsserver", "coc-stylelint", "coc-json", "coc-python", "coc-prettier", "coc-html", "coc-css", "coc-eslint", "coc-yaml", "coc-ultisnips", "coc-gocode", "coc-highlight", "coc-snippets", "coc-yank", "coc-pairs", "coc-markdownlint", "coc-explorer"]
+
 set hidden
 
 " Some servers have issues with backup files, see #649.
