@@ -780,7 +780,23 @@ endfunction
 " Taken from https://github.com/neoclide/coc.nvim
 " TextEdit might fail if hidden is not set.
 
-let g:coc_global_extensions = ["coc-tsserver", "coc-stylelint", "coc-json", "coc-python", "coc-prettier", "coc-html", "coc-css", "coc-eslint", "coc-yaml", "coc-ultisnips", "coc-gocode", "coc-highlight", "coc-snippets", "coc-yank", "coc-pairs", "coc-markdownlint", "coc-explorer"]
+let g:coc_global_extensions = ["coc-tsserver", 
+      \ "coc-stylelint",
+      \ "coc-json",
+      \ "coc-python",
+      \ "coc-prettier",
+      \ "coc-html",
+      \ "coc-css",
+      \ "coc-eslint",
+      \ "coc-yaml",
+      \ "coc-ultisnips",
+      \ "coc-go",
+      \ "coc-highlight",
+      \ "coc-snippets",
+      \ "coc-yank",
+      \ "coc-pairs",
+      \ "coc-markdownlint",
+      \ "coc-explorer"]
 
 set hidden
 
