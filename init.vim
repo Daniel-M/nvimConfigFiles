@@ -1,25 +1,9 @@
-" let g:python_host_prog = '/usr/bin/python2'
-" let g:python3_host_prog = '/usr/bin/python3'
-
 " *************************************
 " PLUGIN SECTION for Vim-Plug
 " *************************************
 
 call plug#begin('~/.config/nvim/plugged')
 
-" Make sure you use single quotes
-
-""
-""
-"" Golang plugins 
-""
-""
-
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'}
-
-" GoLang Syntax checker for nvim
-" Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh >> /tmp/install_gocode.log 2>&1'}
 
 ""
 ""
@@ -28,7 +12,7 @@ call plug#begin('~/.config/nvim/plugged')
 ""
 
 " Utilsnips
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 " Snippets for Utilsnips
 Plug 'honza/vim-snippets'
@@ -41,9 +25,6 @@ Plug 'honza/vim-snippets'
 
 " The colorscheme with neovim in mind.
 Plug 'freeo/vim-kalisi'
-
-" Another solarized color theme for truecolor neovim
-" Plug 'icymind/neosolarized'
 
 " Lean & mean status/tabline for vim that's light as air.
 Plug 'vim-airline/vim-airline'
@@ -62,19 +43,6 @@ Plug 'Yggdroot/indentLine'
 ""
 ""
 
-"" vim-prettier
-" Plug 'prettier/vim-prettier', {
-  " \ 'do': 'yarn install',
-  " \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-
-"" TypeScript plugin for neovim
-"" requires Deoplete
-" Plug 'mhartington/nvim-typescript'
-
-
-" JavaScript autocompletion for ReactJS
-" Plug 'chemzqm/vim-jsx-improve'
-
 " JavaScript autocompletion
 Plug 'pangloss/vim-javascript'
 
@@ -90,21 +58,6 @@ Plug 'dense-analysis/ale'
 
 "" Javascript function parameter autocompletion engine
 " Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-
-"Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
-"Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-
-""
-""
-""
-"" Python
-""
-
-"" This requires jedi installed
-" Plug 'zchee/deoplete-jedi'
-
-"" Jump to definition in another buffer 
-" Plug 'davidhalter/jedi-vim'
 
 ""
 ""
@@ -122,28 +75,6 @@ Plug 'neoclide/coc-denite'
 " Plug 'zchee/deoplete-go'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
-" Auto formater
-" Plug 'sbdchd/neoformat'
-
-""" Another completion engine
-""Plug 'ncm2/ncm2'
-""Plug 'roxma/nvim-yarp'
-""" NOTE: you need to install completion sources to get completions. Check
-""" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
-""Plug 'ncm2/ncm2-bufword'
-""Plug 'ncm2/ncm2-path'
-""
-""Plug 'ncm2/ncm2-ultisnips'
-""
-""Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
-""
-""Plug 'HerringtonDarkholme/yats.vim'
-""Plug 'ncm2/nvim-typescript', {'do': './install.sh'}
-""
-""Plug 'ncm2/ncm2-jedi'
-""
-""Plug 'ncm2/ncm2-go'
-
 ""
 ""
 "" Utilities and stuff
@@ -159,14 +90,8 @@ Plug 'terryma/vim-multiple-cursors'
 " Auto pairs
 " Plug 'jiangmiao/auto-pairs'
 
-" Git integration for vim
-" Plug 'jreybert/vimagit'
-
 " Move Lines up or down without copying them
 Plug 'matze/vim-move'
-
-" Neomake is a plugin for Vim/Neovim to asynchronously run programs 
-" Plug 'neomake/neomake'
 
 " Latex Plugin
 " Plug 'lervag/vimtex'
@@ -187,11 +112,6 @@ Plug 'zhou13/vim-cursorword'
 " Orgasmic commenting tool
 Plug 'scrooloose/nerdcommenter', { 'tag': '*' }
 
-" Sneak is a minimalist, versatile Vim motion plugin
-" Plug 'justinmk/vim-sneak'
-
-" Explore buffers
-" Plug 'jlanzarotta/bufexplorer'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -205,50 +125,6 @@ call plug#end()
 " PLUGIN CONFIGURATION SECTION
 " *************************************
 
-"""
-" Configure vim-ag silver searcher
-"
-" let g:ags_enable_async = 1
-
-" """
-" " Configure Deoplete
-" "
-" "" Start Deoplete plugin
-" call deoplete#enable()
-" let g:deoplete#enable_at_startup = 1
-" "" Required by typescript in Neovim
-" let g:deoplete#enable_debug = 1
-" let g:deoplete#enable_profile = 1
-" call deoplete#enable_logging('DEBUG', '/tmp/deoplete_neovim.log')
-" " let g:deoplete#omni#functions = {}
-" " let g:deoplete#omni#functions.javascript = [
-"   " \ 'jspc#omni'
-" " \]
-
-" "set completeopt=longest,menuone,preview
-" set completeopt=longest,menuone
-" let g:deoplete#sources = {}
-" let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips']
-"
-" " Integration of ALE with deoplete
-" call deoplete#custom#option('sources', {
-" \ '_': ['ale'],
-" \})
-" call deoplete#custom#option('sources', {
-" \ '_': ['ale'],
-" \ 'javascript.jsx': ['file', 'ultisnips'],
-" \})
-
-" autocmd FileType jsx let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-" autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" close the preview window when you're not using it
-" let g:SuperTabClosePreviewOnPopupClose = 1
-" or just disable the preview entirely
-"set completeopt-=preview
-
 """"""" Configure multicursor 
 let g:multi_cursor_use_default_mapping=0
 
@@ -261,54 +137,6 @@ let g:multi_cursor_next_key            = '<C-m>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
-
-""""
-"" Configure neomake
-""
-"" Set log files
-" let g:neomake_logfile = "/tmp/neomake_neovim.log"
-" "" When writing a buffer.
-" " call neomake#configure#automake('w')
-" "" When writing a buffer, and on normal mode changes (after 750ms).
-" call neomake#configure#automake('nw', 750)
-" "" When reading a buffer (after 1s), and when writing.
-" " call neomake#configure#automake('rw', 1000)
-" ""
-" " call neomake#configure#automake('nrwi', 500)
-"
-" let g:neomake_python_enabled_makers = ['pylint']
-
-"" Configure jedi-vim
-" disable autocompletion, cause we use deoplete for completion
-" let g:jedi#completions_enabled = 0
-
-" open the go-to function in split, not another buffer
-" let g:jedi#use_splits_not_buffers = "right"
-
-" open the go-to function in split, not another buffer
-" let g:jedi#use_splits_not_buffers = "right"
-
-" """
-" " Configure UltiSnips - Snippets
-" "
-" " Snippets directory
-" "let g:UltiSnipsSnippetDirectories="~/.config/nvim/plugged/vim-snippets/UltiSnips"
-" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
-" " let g:UltiSnipsExpandTrigger="<C-j>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" " If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
-
-"ncm2
-"let g:UltiSnipsRemoveSelectModeMappings = 0
-
-"""
-" Configure mxw vim-jsx
-
-" To allow .js extension for JSX syntax highlighting
-" let g:jsx_ext_required = 0
 
 """
 " Enable indentation guides on startup (vim-indent-guides)
@@ -352,8 +180,10 @@ let g:ale_fixers = {
 \}
 
 let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
-let g:ale_linters = {'jsx': ['stylelint', 'eslint', 'jslint']}
-
+let g:ale_linters = {
+	\ 'go': ['gopls'],
+  \ 'jsx': ['stylelint', 'eslint', 'jslint']
+	\}
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 0
 let g:prettier#exec_cmd_async = 1
@@ -426,22 +256,8 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 " let g:highlightedyank_highlight_duration = 220
 
 """
-""" COC Yank :CocInstall coc-yank
-"""
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-
-
-" """ Configure auto-pairs
-" " AutoPairsShortcutToggle
-" " Default: '<M-p>'
-" let g:AutoPairsShortcutJump = ''
-" let g:AutoPairsShortcutToggle = ''
-" " The shortcut to toggle auto-pairs.
-" " Default: '<M-e>'
-" let g:AutoPairsShortcutFastWrap = ''
-
-
 "" Configure Nerdcommenter
+"""
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
@@ -490,211 +306,6 @@ let g:NERDToggleCheckAllLines = 1
 ""    \ ['darkred',     'DarkOrchid3'],
 ""    \ ['red',         'firebrick3'],
 ""    \ ]
-
-" *************************************
-" END PLUGIN CONFIGURATION SECTION
-" *************************************
-
-
-
-
-" *************************************
-" KEYMAPPING AND TWEAKING SECTION
-" *************************************
-" Recall that <leader> maps to "\" by default
-" so <leader>q means "\q"on a default installation
-
-" Actually delete characters when using the backspace
-set backspace=2
-
-" Longer history
-set history=1000
-
-"highlighting disabling
-nmap <leader>q :nohlsearch<CR>
-
-" Save global marks on exit.
-" This has been superseded by shada,
-" look below with yoink
-" set viminfo='100,<100,s100,h
-
-"""""
-"SEARCH AND HIGHLIGHTING
-
-" Show matching brackets
-set showmatch
-" Show line numbers
-set number
-" Continue comment marker on new lines
-set formatoptions+=o
-
-set incsearch
-set noignorecase
-"set ignorecase
-set smartcase
-set hlsearch
-
-" Show line and column number in the status bar
-set ruler
-
-filetype plugin indent on
-set omnifunc=syntaxcomplete#Complete
-
-" expand tabs as spaces
-set expandtab
-" set the tab size to 2 spaces
-set tabstop=2 "Parallelo configs
-set shiftwidth=2 "Parallelo configs
-
-" Keep indenting as the previous line
-set autoindent
-
-" Show mark at 80 chars length
-set colorcolumn=80
-
-" Word wrapping
-"set textwidth=80
-
-" Allow mouse click enabled in terminal
-" mouse click places cursor there
-set mouse=a
-
-" Show status bar
-set laststatus=2
-
-" Show autocompletion of commands
-set wildmenu
-set wildmode=longest,list,full
-"" This was already set above
-"set completeopt=longest,menuone
-
-" Put the cursor to blink
-set guicursor=a:blinkon100
-
-" Keep 10 lines above or below the cursor to give more context
-set scrolloff=10
-
-"
-" SET SPELL CHEKING ON, USEFUL WHEN WRITING STUFF
-"
-"spanish spell checking not tested
-"setlocal spell spelllang=es
-"
-"english spell checking tested and working
-"setlocal spell spelllang=en
-set spell spelllang=en
-
-
-"
-" COLOR SCHEMES
-"
-
-"Activating freeo/vim-kalisi colorscheme
-colorscheme kalisi
-set background=dark
-"set background=light
-
-" flattened romainl/flattened colorscheme
-"colorscheme flattened_dark
-
-"colorscheme NeoSolarized
-
-set t_Co=256
-" in case t_Co alone doesn't work, add this as well:
-"let &t_AB="<leader>e[48;5;%dm"
-"let &t_AF="<leader>e[38;5;%dm"
-
-" *************************************
-" KEYMAPPING
-" *************************************
-
-" commenting and uncommenting with NERDCommenter plugin
-nmap <C-c> <leader>cc
-nmap <C-x> <leader>cu
-vmap <C-c> <leader>cc
-" vmap <C-c> <leader>ci
-vmap <C-x> <leader>cu
-
-"line numbers
-nmap <leader>ln :setlocal number!<CR>
-
-"paste mode
-set pastetoggle=<F3>
-set nopaste
-
-"NERD Tree
-" nmap <leader>nt :NERDTreeToggle<CR>
-" nmap <space>e :CocCommand explorer<CR>
-nmap <leader>et :CocCommand explorer<CR>
-
-"""
-""" netrw built-in explorer configured to look like nerdtree
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 15
-" augroup ProjectDrawer
-  " autocmd!
-  " autocmd VimEnter * :Vexplore
-" augroup END
-
-"buffer next and previous
-nmap <C-n> :bnext<CR>
-nmap <C-p> :bprev<CR>
-
-" Open a new tab 
-nmap <C-b><C-t> :tabnew<CR>
-
-"tabs next and previous
-nmap <F4> :tabprevious<CR>
-nmap <F6> :tabnext<CR>
-
-"search with cotrlP
-"nmap ; :CtrlPBuffer<CR>
-
-" Formatting mappings to insert double quotes
-" and enclosing simbols
-""inoremap , ,<space>
-""inoremap " ""<left>
-""inoremap ' ''<left>
-""inoremap ( ()<left>
-""inoremap [ []<left>
-""inoremap { {}<left>
-""inoremap {<CR> {<CR>}<ESC>O
-""inoremap {;<CR> {<CR>};<ESC>O
-
-" Visual selection mappings
-" double quotes. If mappings above change,  this should change to c""<ESC>P
-vmap i" c"<ESC>p
-" single quotes. If mappings above change,  this should change to c''<ESC>P
-vmap i' c'<ESC>p
-vmap i( c(<ESC>p
-vmap i{ c{ <ESC>pi<right> <ESC>
-vmap i[ c[<ESC>p
-vmap i< c<><ESC>P
-vmap i` c``<ESC>P
-
-"vmap i< c< <ESC>Pi<right> ><ESC>
-
-" buffer close
-nmap <C-b><C-d> :bd<Enter>
-
-" Show all pending TODO comments
-" using the silver searcher
-function! Todo()
-:Ags TODO
-endfunction
-command Todo :call Todo()
-
-" For local word replace in between {}
-" nmap <leader>lr wb"ryiw[{V%:s/<C-R>r//gc<left><left><left>
-
-" For global word replace
-" nmap <leader>gr wb"ryiw:%s/<C-R>r//gc<left><left><left>
-
-" Search the current word in the workspace
-" nmap <F2> wb"ryiw:Ags<space><C-R>r<CR>
 
 """
 " Adding manual configuration for Prettier
@@ -920,20 +531,186 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" " Mappings using CoCList:
-" " Show all diagnostics.
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" " Manage extensions.
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" " Show commands.
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" " Find symbol of current document.
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" " Search workspace symbols.
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" " Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" " Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" " Resume latest coc list.
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+"""
+""" COC Yank :CocInstall coc-yank
+"""
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+
+" *************************************
+" END PLUGIN CONFIGURATION SECTION
+" *************************************
+
+
+" *************************************
+" KEYMAPPING AND TWEAKING SECTION
+" *************************************
+" Recall that <leader> maps to "\" by default
+" so <leader>q means "\q"on a default installation
+
+" Actually delete characters when using the backspace
+set backspace=2
+
+" Longer history
+set history=1000
+
+"highlighting disabling
+nmap <leader>q :nohlsearch<CR>
+
+" Save global marks on exit.
+" This has been superseded by shada,
+" look below with yoink
+" set viminfo='100,<100,s100,h
+
+"""""
+"SEARCH AND HIGHLIGHTING
+
+" Show matching brackets
+set showmatch
+" Show line numbers
+set number
+" Continue comment marker on new lines
+set formatoptions+=o
+
+set incsearch
+set noignorecase
+"set ignorecase
+set smartcase
+set hlsearch
+
+" Show line and column number in the status bar
+set ruler
+
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
+
+" expand tabs as spaces
+set expandtab
+" set the tab size to 2 spaces
+set tabstop=2 "Parallelo configs
+set shiftwidth=2 "Parallelo configs
+
+" Keep indenting as the previous line
+set autoindent
+
+" Show mark at 80 chars length
+set colorcolumn=80
+
+" Word wrapping
+"set textwidth=80
+
+" Allow mouse click enabled in terminal
+" mouse click places cursor there
+set mouse=a
+
+" Show status bar
+set laststatus=2
+
+" Show autocompletion of commands
+set wildmenu
+set wildmode=longest,list,full
+"" This was already set above
+"set completeopt=longest,menuone
+
+" Put the cursor to blink
+set guicursor=a:blinkon100
+
+" Keep 10 lines above or below the cursor to give more context
+set scrolloff=10
+
+"
+" SET SPELL CHEKING ON, USEFUL WHEN WRITING STUFF
+"
+"spanish spell checking not tested
+"setlocal spell spelllang=es
+"
+"english spell checking tested and working
+"setlocal spell spelllang=en
+set spell spelllang=en
+
+
+"
+" COLOR SCHEMES
+"
+
+"Activating freeo/vim-kalisi colorscheme
+colorscheme kalisi
+set background=dark
+"set background=light
+
+" flattened romainl/flattened colorscheme
+"colorscheme flattened_dark
+
+"colorscheme NeoSolarized
+
+set t_Co=256
+" in case t_Co alone doesn't work, add this as well:
+"let &t_AB="<leader>e[48;5;%dm"
+"let &t_AF="<leader>e[38;5;%dm"
+
+" *************************************
+" KEYMAPPING
+" *************************************
+
+" commenting and uncommenting with NERDCommenter plugin
+nmap <C-c> <leader>cc
+nmap <C-x> <leader>cu
+vmap <C-c> <leader>cc
+" vmap <C-c> <leader>ci
+vmap <C-x> <leader>cu
+
+"line numbers
+nmap <leader>ln :setlocal number!<CR>
+
+"paste mode
+set pastetoggle=<F3>
+set nopaste
+
+"NERD Tree
+" nmap <leader>nt :NERDTreeToggle<CR>
+" nmap <space>e :CocCommand explorer<CR>
+nmap <leader>et :CocCommand explorer<CR>
+
+"""
+""" netrw built-in explorer configured to look like nerdtree
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 15
+" augroup ProjectDrawer
+  " autocmd!
+  " autocmd VimEnter * :Vexplore
+" augroup END
+
+"buffer next and previous
+nmap <C-n> :bnext<CR>
+nmap <C-p> :bprev<CR>
+
+" Open a new tab 
+nmap <C-b><C-t> :tabnew<CR>
+
+"tabs next and previous
+nmap <F4> :tabprevious<CR>
+nmap <F6> :tabnext<CR>
+
+" Visual selection mappings
+" double quotes. If mappings above change,  this should change to c""<ESC>P
+vmap i" c"<ESC>p
+" single quotes. If mappings above change,  this should change to c''<ESC>P
+vmap i' c'<ESC>p
+vmap i( c(<ESC>p
+vmap i{ c{ <ESC>pi<right> <ESC>
+vmap i[ c[<ESC>p
+vmap i< c<><ESC>P
+vmap i` c``<ESC>P
+
+" close current buffer 
+nmap <C-b><C-d> :bd<Enter>
+
+" Show all pending TODO comments
+" using the silver searcher
+function! Todo()
+:Ags TODO
+endfunction
+command Todo :call Todo()
