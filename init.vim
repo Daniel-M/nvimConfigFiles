@@ -12,7 +12,7 @@ call plug#begin('~/.config/nvim/plugged')
 ""
 
 " Utilsnips
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 
 " Snippets for Utilsnips
 Plug 'honza/vim-snippets'
@@ -33,9 +33,8 @@ Plug 'vim-airline/vim-airline-themes'
 " Mark indentation lines
 Plug 'Yggdroot/indentLine'
 
-" Color matched parenthesis
-"Plug 'kien/rainbow_parentheses.vim'
-
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 ""
 ""
@@ -176,13 +175,13 @@ let g:ale_list_window_size = 5
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint', 'prettier'],
+\   'javascript': ['prettier', 'eslint'],
 \}
 
 let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
 let g:ale_linters = {
 	\ 'go': ['gopls'],
-  \ 'jsx': ['stylelint', 'eslint', 'jslint']
+  \ 'jsx': ['pretier', 'stylelint', 'eslint', 'jslint']
 	\}
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 0
@@ -282,30 +281,6 @@ let g:NERDTrimTrailingWhitespace = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDToggleCheckAllLines = 1
 
-"autocmd FileType agse,agsv RainbowParenthesesToggle
-"" Rainbow parenthesis configurations
-"au VimEnter * RainbowParenthesesToggle
-"au Syntax * RainbowParenthesesLoadRound
-"au Syntax * RainbowParenthesesLoadSquare
-"au Syntax * RainbowParenthesesLoadBraces
-""let g:rbpt_colorpairs = [
-""    \ ['brown',       'RoyalBlue3'],
-""    \ ['Darkblue',    'SeaGreen3'],
-""    \ ['darkgray',    'DarkOrchid3'],
-""    \ ['darkgreen',   'firebrick3'],
-""    \ ['darkcyan',    'RoyalBlue3'],
-""    \ ['darkred',     'SeaGreen3'],
-""    \ ['darkmagenta', 'DarkOrchid3'],
-""    \ ['brown',       'firebrick3'],
-""    \ ['gray',        'RoyalBlue3'],
-""    \ ['black',       'SeaGreen3'],
-""    \ ['darkmagenta', 'DarkOrchid3'],
-""    \ ['Darkblue',    'firebrick3'],
-""    \ ['darkgreen',   'RoyalBlue3'],
-""    \ ['darkcyan',    'SeaGreen3'],
-""    \ ['darkred',     'DarkOrchid3'],
-""    \ ['red',         'firebrick3'],
-""    \ ]
 
 """
 " Adding manual configuration for Prettier
@@ -400,12 +375,12 @@ let g:coc_global_extensions = ["coc-tsserver",
       \ "coc-css",
       \ "coc-eslint",
       \ "coc-yaml",
-      \ "coc-ultisnips",
       \ "coc-go",
       \ "coc-highlight",
       \ "coc-snippets",
       \ "coc-yank",
       \ "coc-pairs",
+      \ "coc-ultisnips",
       \ "coc-markdownlint",
       \ "coc-explorer"]
 
@@ -433,15 +408,17 @@ set signcolumn=yes
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -633,6 +610,8 @@ set spell spelllang=en
 " COLOR SCHEMES
 "
 
+" Rainbow parenthesis
+
 "Activating freeo/vim-kalisi colorscheme
 colorscheme kalisi
 set background=dark
@@ -643,7 +622,8 @@ set background=dark
 
 "colorscheme NeoSolarized
 
-set t_Co=256
+set termguicolors
+" set t_Co=256
 " in case t_Co alone doesn't work, add this as well:
 "let &t_AB="<leader>e[48;5;%dm"
 "let &t_AF="<leader>e[38;5;%dm"
@@ -708,9 +688,22 @@ vmap i` c``<ESC>P
 " close current buffer 
 nmap <C-b><C-d> :bd<Enter>
 
+" Set folding method by syntax
+set foldmethod=syntax
+" set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+
+" Format JSON text using python
+function! JsonFormat()
+:%!python -m json.tool
+endfunction
+command JsonFormat :call JsonFormat()
+
 " Show all pending TODO comments
 " using the silver searcher
-function! Todo()
-:Ags TODO
-endfunction
-command Todo :call Todo()
+" function! Todo()
+" :Ags TODO
+" endfunction
+" command Todo :call Todo()

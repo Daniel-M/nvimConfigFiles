@@ -2,5 +2,10 @@
   "suggest.triggerAfterInsertEnter": true,
   "suggest.snippetIndicator": "►",
   "suggest.echodocSupport": true,
-  "eslint.packageManager": "npm"
+  "eslint.packageManager": "npm",
+  "snippets.extends": {
+    "javascriptreact": ["javascript"],
+    "typescriptreact": ["javascript"],
+    "typescript": ["javascript"]
+  }
 }
