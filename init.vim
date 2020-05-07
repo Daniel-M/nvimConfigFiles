@@ -102,7 +102,7 @@ Plug 'matze/vim-move'
 " Plug 'machakann/vim-highlightedyank'
 
 " Underline the words like the one under the cursor
-Plug 'zhou13/vim-cursorword'
+" Plug 'zhou13/vim-cursorword'
 
 " NERDTree plugin to have a nav-bar
 " On-demand loading when calling :NERDTreeToggle
@@ -453,6 +453,13 @@ function! s:show_documentation()
   endif
 endfunction
 
+" make error texts have a red color
+highlight CocErrorHighlight ctermfg=Red  guifg=#ff0000
+highlight CocErrorLine ctermfg=Red  guifg=#ff0000
+"
+highlight CocWarningHighlight ctermfg=Yellow  guifg=#ff8800
+highlight CocWarningLine ctermfg=Yellow  guifg=#ff8800
+highlight link CocErrorSign GruvboxRed
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -531,7 +538,7 @@ set backspace=2
 " Longer history
 set history=1000
 
-"highlighting disabling
+"search highlighting disabling
 nmap <leader>q :nohlsearch<CR>
 
 " Save global marks on exit.
@@ -703,7 +710,8 @@ command JsonFormat :call JsonFormat()
 
 " Show all pending TODO comments
 " using the silver searcher
-" function! Todo()
+function! Todo()
 " :Ags TODO
-" endfunction
-" command Todo :call Todo()
+:Denite grep:TODO -no-empty<CR>
+endfunction
+command Todo :call Todo()
