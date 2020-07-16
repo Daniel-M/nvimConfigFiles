@@ -26,6 +26,11 @@ Plug 'honza/vim-snippets'
 " The colorscheme with neovim in mind.
 Plug 'freeo/vim-kalisi'
 
+" Aurora dark colorscheme
+Plug 'rafalbromirski/vim-aurora'
+
+Plug 'yassinebridi/vim-purpura'
+
 " Lean & mean status/tabline for vim that's light as air.
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -38,7 +43,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 ""
 ""
-"" JavaScript, Node, React, TypeScript 
+"" JavaScript, Node, React, TypeScript
 ""
 ""
 
@@ -83,6 +88,9 @@ Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 " Multicursor like Sublime (Multiline variable edit)
 Plug 'terryma/vim-multiple-cursors'
 
+" Highlight word under cursor
+" Plug 'dominikduda/vim_current_word'
+
 " Silver searcher
 " Plug 'gabesoft/vim-ags'
 
@@ -124,7 +132,7 @@ call plug#end()
 " PLUGIN CONFIGURATION SECTION
 " *************************************
 
-""""""" Configure multicursor 
+""""""" Configure multicursor
 let g:multi_cursor_use_default_mapping=0
 
 " Default mapping
@@ -136,6 +144,9 @@ let g:multi_cursor_next_key            = '<C-m>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
+
+""""""" Configure vim_current_word
+" let g:vim_current_word#highlight_delay = 500 "in milliseconds
 
 """
 " Enable indentation guides on startup (vim-indent-guides)
@@ -166,7 +177,7 @@ let g:ale_completion_enabled = 0
 "let g:ale_sign_error = '>>'
 "let g:ale_sign_warning = '--'
 "
-" Enable ALE status bar messages integrated with vim-airline. 
+" Enable ALE status bar messages integrated with vim-airline.
 " Set this, Airline will handle the rest.
 let g:airline#extensions#ale#enabled = 1
 "
@@ -199,7 +210,8 @@ let g:airline_detect_spell=1
 "
 " Set the dark theme
 "let g:airline_theme='dark'
-let g:airline_theme='cool'
+" let g:airline_theme='cool'
+let g:airline_theme='purpura'
 
 "let g:airline_powerline_fonts = 1
 "if !exists('g:airline_symbols')
@@ -278,7 +290,7 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
+" Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
 
@@ -302,6 +314,25 @@ nmap ; :Denite buffer<CR>
 nmap <leader>t :DeniteProjectDir file/rec<CR>
 nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
 nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
+" " replace grep with ag
+" call denite#custom#var('grep', {
+"     \ 'command': ['ag'],
+"     \ 'default_opts': ['-i', '--vimgrep'],
+"     \ 'recursive_opts': [],
+"     \ 'pattern_opt': [],
+"     \ 'separator': ['--'],
+"     \ 'final_opts': [],
+		" \ })
+
+" replace grep with rg
+call denite#custom#var('grep', {
+		\ 'command': ['rg'],
+		\ 'default_opts': ['-i', '--vimgrep', '--no-heading'],
+		\ 'recursive_opts': [],
+		\ 'pattern_opt': ['--regexp'],
+		\ 'separator': ['--'],
+		\ 'final_opts': [],
+		\ })
 
 " Define mappings while in 'filter' mode
 "   <C-o>         - Switch to normal mode inside of search results
@@ -366,7 +397,7 @@ endfunction
 " Taken from https://github.com/neoclide/coc.nvim
 " TextEdit might fail if hidden is not set.
 
-let g:coc_global_extensions = ["coc-tsserver", 
+let g:coc_global_extensions = ["coc-tsserver",
       \ "coc-stylelint",
       \ "coc-json",
       \ "coc-python",
@@ -453,16 +484,19 @@ function! s:show_documentation()
   endif
 endfunction
 
-" make error texts have a red color
-highlight CocErrorHighlight ctermfg=Red  guifg=#ff0000
-highlight CocErrorLine ctermfg=Red  guifg=#ff0000
+" " make error texts have a red color
+" highlight CocErrorHighlight ctermfg=Red  guifg=#ff0000
+" highlight CocErrorLine ctermfg=Red  guifg=#ff0000
+" "
+" highlight CocWarningHighlight ctermfg=Yellow  guifg=#ff8800
+" highlight CocWarningLine ctermfg=Yellow  guifg=#ff8800
+" highlight link CocErrorSign GruvboxRed
 "
-highlight CocWarningHighlight ctermfg=Yellow  guifg=#ff8800
-highlight CocWarningLine ctermfg=Yellow  guifg=#ff8800
-highlight link CocErrorSign GruvboxRed
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
+" " Highlight the symbol and its references when holding the cursor.
+" " hi link default CocHighlightText ctermfg=Red  guifg=#ff0000
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+" hi CursorColumn guifg=#ffffff guibg=#5b005b
+"
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
@@ -620,7 +654,10 @@ set spell spelllang=en
 " Rainbow parenthesis
 
 "Activating freeo/vim-kalisi colorscheme
-colorscheme kalisi
+" colorscheme kalisi
+" colorscheme aurora
+" Mind of changing the airline theme accordingly
+colorscheme purpura
 set background=dark
 "set background=light
 
@@ -634,6 +671,22 @@ set termguicolors
 " in case t_Co alone doesn't work, add this as well:
 "let &t_AB="<leader>e[48;5;%dm"
 "let &t_AF="<leader>e[38;5;%dm"
+
+"" Place this coc-nvim config here after we changed the colorscheme
+" make error texts have a red color
+highlight CocErrorHighlight ctermfg=Red  guifg=#ff0000
+highlight CocErrorLine ctermfg=Red  guifg=#ff0000
+"
+highlight CocWarningHighlight ctermfg=Yellow  guifg=#ff8800
+highlight CocWarningLine ctermfg=Yellow  guifg=#ff8800
+highlight link CocErrorSign GruvboxRed
+
+" Highlight the symbol and its references when holding the cursor.
+" hi link default CocHighlightText ctermfg=Red  guifg=#ff0000
+autocmd CursorHold * silent call CocActionAsync('highlight')
+hi CursorColumn guifg=#ffffff guibg=#5b007b
+
+
 
 " *************************************
 " KEYMAPPING
@@ -674,7 +727,7 @@ let g:netrw_winsize = 15
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
 
-" Open a new tab 
+" Open a new tab
 nmap <C-b><C-t> :tabnew<CR>
 
 "tabs next and previous
@@ -692,7 +745,7 @@ vmap i[ c[<ESC>p
 vmap i< c<><ESC>P
 vmap i` c``<ESC>P
 
-" close current buffer 
+" close current buffer
 nmap <C-b><C-d> :bd<Enter>
 
 " Set folding method by syntax
@@ -709,9 +762,37 @@ endfunction
 command JsonFormat :call JsonFormat()
 
 " Show all pending TODO comments
-" using the silver searcher
+" using the Denite with ripgrep searcher
 function! Todo()
 " :Ags TODO
-:Denite grep:TODO -no-empty<CR>
+:Denite grep: file/rec -no-empty <CR>
 endfunction
 command Todo :call Todo()
+
+" Trailing spaces functions
+function ShowSpaces(...)
+  let @/='\v(\s+$)|( +\ze\t)'
+  let oldhlsearch=&hlsearch
+  if !a:0
+    let &hlsearch=!&hlsearch
+  else
+    let &hlsearch=a:1
+  end
+  return oldhlsearch
+endfunction
+
+function TrimSpaces() range
+  let oldhlsearch=ShowSpaces(1)
+  execute a:firstline.",".a:lastline."substitute ///gec"
+  let &hlsearch=oldhlsearch
+endfunction
+
+command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
+command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
+nnoremap <F10>     :ShowSpaces 1<CR>
+nnoremap <S-F10>   m`:TrimSpaces<CR>``
+vnoremap <S-F10>   :TrimSpaces<CR>
+
+" To use % for matching closing tags ([{}])
+set showmatch
+set matchtime=3
