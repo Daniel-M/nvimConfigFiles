@@ -682,10 +682,8 @@ highlight CocWarningLine ctermfg=Yellow  guifg=#ff8800
 highlight link CocErrorSign GruvboxRed
 
 " Highlight the symbol and its references when holding the cursor.
-" hi link default CocHighlightText ctermfg=Red  guifg=#ff0000
 autocmd CursorHold * silent call CocActionAsync('highlight')
-hi CursorColumn guifg=#ffffff guibg=#5b007b
-
+highlight CursorColumn guifg=#ffffff guibg=#5b007b
 
 
 " *************************************
