@@ -685,7 +685,8 @@ highlight link CocErrorSign GruvboxRed
 autocmd CursorHold * silent call CocActionAsync('highlight')
 highlight CursorColumn guifg=#ffffff guibg=#5b007b
 
-
+" syn match myTodo contained "\(TODO\|FIXME\|FIX\)"
+highlight Todo guifg=#ffffff guibg=#0000ff
 " *************************************
 " KEYMAPPING
 " *************************************
@@ -759,31 +760,12 @@ function! JsonFormat()
 endfunction
 command JsonFormat :call JsonFormat()
 
-" Show all pending TODO comments
+" Show all pending TODO FIXME FIX comments
 " using the Denite with ripgrep searcher
 function! Todo()
-" :Ags TODO
-:Denite grep: file/rec -no-empty <CR>
+:Denite -input=TODO grep -no-empty
 endfunction
 command Todo :call Todo()
-
-" Trailing spaces functions
-function ShowSpaces(...)
-  let @/='\v(\s+$)|( +\ze\t)'
-  let oldhlsearch=&hlsearch
-  if !a:0
-    let &hlsearch=!&hlsearch
-  else
-    let &hlsearch=a:1
-  end
-  return oldhlsearch
-endfunction
-
-function TrimSpaces() range
-  let oldhlsearch=ShowSpaces(1)
-  execute a:firstline.",".a:lastline."substitute ///gec"
-  let &hlsearch=oldhlsearch
-endfunction
 
 command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
 command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
