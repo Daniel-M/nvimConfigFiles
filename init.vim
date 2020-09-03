@@ -119,6 +119,8 @@ Plug 'matze/vim-move'
 " Orgasmic commenting tool
 Plug 'scrooloose/nerdcommenter', { 'tag': '*' }
 
+" Git integration
+Plug 'tpope/vim-fugitive'
 
 " Add plugins to &runtimepath
 call plug#end()
