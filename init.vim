@@ -92,10 +92,10 @@ Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'terryma/vim-multiple-cursors'
 
 " Highlight word under cursor
-Plug 'dominikduda/vim_current_word'
+" Plug 'dominikduda/vim_current_word'
 
 " Underline the words like the one under the cursor
-" Plug 'zhou13/vim-cursorword'
+Plug 'zhou13/vim-cursorword'
 "
 " Silver searcher
 " Plug 'gabesoft/vim-ags'
@@ -162,6 +162,12 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 """"""" Configure vim_current_word
 " let g:vim_current_word#highlight_delay = 500 "in milliseconds
+" Twins of word under cursor:
+" let g:vim_current_word#highlight_twins = 1
+" The word under cursor:
+" let g:vim_current_word#highlight_current_word = 1
+" Disabling this option will make the word highlight persist over window switches and even over focusing different application window.
+"let g:vim_current_word#highlight_only_in_focused_window = 0
 
 """
 " Enable indentation guides on startup (vim-indent-guides)
