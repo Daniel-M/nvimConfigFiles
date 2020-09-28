@@ -75,8 +75,8 @@ Plug 'dense-analysis/ale'
 " Plug 'neoclide/coc-denite'
 
 " Deoplete - completion for Neovim
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'zchee/deoplete-go'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
 ""
@@ -92,13 +92,16 @@ Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'terryma/vim-multiple-cursors'
 
 " Highlight word under cursor
-" Plug 'dominikduda/vim_current_word'
+Plug 'dominikduda/vim_current_word'
 
+" Underline the words like the one under the cursor
+" Plug 'zhou13/vim-cursorword'
+"
 " Silver searcher
 " Plug 'gabesoft/vim-ags'
 
 " Auto pairs
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
 " Move Lines up or down without copying them
 Plug 'matze/vim-move'
@@ -107,23 +110,30 @@ Plug 'matze/vim-move'
 " Plug 'lervag/vimtex'
 
 " Yoink Plugin
-" Plug 'svermeulen/vim-yoink'
+Plug 'svermeulen/vim-yoink'
 
 " Visuals about Yanks
-" Plug 'machakann/vim-highlightedyank'
+Plug 'machakann/vim-highlightedyank'
 
-" Underline the words like the one under the cursor
-" Plug 'zhou13/vim-cursorword'
 
 " NERDTree plugin to have a nav-bar
 " On-demand loading when calling :NERDTreeToggle
-" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' , 'tag': '*' }
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' , 'tag': '*' }
+
+" git plugin for nerdtree
+Plug 'Xuyuanp/nerdtree-git-plugin' 
+
+" fancy icons for nerd tree
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Orgasmic commenting tool
-Plug 'scrooloose/nerdcommenter', { 'tag': '*' }
+Plug 'preservim/nerdcommenter', { 'tag': '*' }
 
 " Git integration
 Plug 'tpope/vim-fugitive'
+
+" Smooth scrolling
+Plug 'psliwka/vim-smoothie'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -177,10 +187,10 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 "
 " You should not turn this setting on if you wish to use ALE as a completion
 " source for other completion plugins, like Deoplete.
-let g:ale_completion_enabled = 0
-"let g:ale_completion_enabled = 1
-"let g:ale_sign_error = '>>'
-"let g:ale_sign_warning = '--'
+" let g:ale_completion_enabled = 0
+let g:ale_completion_enabled = 1
+" let g:ale_sign_error = '>>'
+" let g:ale_sign_warning = '--'
 "
 " Enable ALE status bar messages integrated with vim-airline.
 " Set this, Airline will handle the rest.
@@ -402,24 +412,24 @@ endfunction
 " Taken from https://github.com/neoclide/coc.nvim
 " TextEdit might fail if hidden is not set.
 
-let g:coc_global_extensions = ["coc-tsserver",
-      \ "coc-stylelint",
-      \ "coc-json",
-      \ "coc-python",
-      \ "coc-prettier",
-      \ "coc-html",
-      \ "coc-css",
-      \ "coc-eslint",
-      \ "coc-yaml",
-      \ "coc-go",
-      \ "coc-highlight",
-      \ "coc-snippets",
-      \ "coc-yank",
-      \ "coc-pairs",
-      \ "coc-ultisnips",
-      \ "coc-markdownlint",
-      \ "coc-explorer"]
-
+" let g:coc_global_extensions = ["coc-tsserver",
+      " \ "coc-stylelint",
+      " \ "coc-json",
+      " \ "coc-python",
+      " \ "coc-prettier",
+      " \ "coc-html",
+      " \ "coc-css",
+      " \ "coc-eslint",
+      " \ "coc-yaml",
+      " \ "coc-go",
+      " \ "coc-highlight",
+      " \ "coc-snippets",
+      " \ "coc-yank",
+      " \ "coc-pairs",
+      " \ "coc-ultisnips",
+      " \ "coc-markdownlint",
+      " \ "coc-explorer"]
+"
 set hidden
 
 " Some servers have issues with backup files, see #649.
