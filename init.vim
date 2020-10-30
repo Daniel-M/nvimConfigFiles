@@ -12,7 +12,7 @@ call plug#begin('~/.config/nvim/plugged')
 ""
 
 " Utilsnips
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 " Snippets for Utilsnips
 Plug 'honza/vim-snippets'
@@ -79,6 +79,12 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
+" Install tabnine machine learning language completion
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+
+"GraphQL completion
+Plug 'jparise/vim-graphql'
+
 ""
 ""
 "" Utilities and stuff
@@ -88,8 +94,11 @@ Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 " Increment numbers sequentially in visual selection
 " Plug 'triglav/vim-visual-increment'
 
-" Multicursor like Sublime (Multiline variable edit)
-Plug 'terryma/vim-multiple-cursors'
+" Multicursor like Sublime (Multiline or multiple occurences edit)
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+" Adding more text targets to work with vim-visual-multi
+Plug 'wellle/targets.vim'
 
 " Highlight word under cursor
 " Plug 'dominikduda/vim_current_word'
@@ -123,6 +132,9 @@ Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' , 'tag': '*' }
 " git plugin for nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin' 
 
+" Fancy icons for VIM
+Plug 'ryanoasis/vim-devicons'
+
 " fancy icons for nerd tree
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
@@ -146,28 +158,8 @@ call plug#end()
 " *************************************
 " PLUGIN CONFIGURATION SECTION
 " *************************************
-
-""""""" Configure multicursor
-let g:multi_cursor_use_default_mapping=0
-
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-m>'
-let g:multi_cursor_select_all_word_key = '<A-m>'
-let g:multi_cursor_start_key           = 'g<C-m>'
-let g:multi_cursor_select_all_key      = 'g<A-m>'
-let g:multi_cursor_next_key            = '<C-m>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
-
-""""""" Configure vim_current_word
-" let g:vim_current_word#highlight_delay = 500 "in milliseconds
-" Twins of word under cursor:
-" let g:vim_current_word#highlight_twins = 1
-" The word under cursor:
-" let g:vim_current_word#highlight_current_word = 1
-" Disabling this option will make the word highlight persist over window switches and even over focusing different application window.
-"let g:vim_current_word#highlight_only_in_focused_window = 0
+" Set default encoding
+set encoding=UTF-8
 
 """
 " Enable indentation guides on startup (vim-indent-guides)
@@ -186,6 +178,21 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " let g:tex_flavor = 'latex'
 
 """
+
+"""
+""" Configure vim multicursor
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<C-m>'
+let g:VM_maps['Find Subword Under'] = '<C-m>'
+
+""" Configure Deoplete
+let g:deoplete#enable_at_startup = 1
+
+call deoplete#custom#option('sources', {
+\ '_': ['ale', 'buffer'],
+\})
+
+"""
 " ALE plugin configurations
 "
 " Enable completion where available.
@@ -193,8 +200,8 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 "
 " You should not turn this setting on if you wish to use ALE as a completion
 " source for other completion plugins, like Deoplete.
-" let g:ale_completion_enabled = 0
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
+" let g:ale_completion_enabled = 1
 " let g:ale_sign_error = '>>'
 " let g:ale_sign_warning = '--'
 "
@@ -218,6 +225,8 @@ let g:ale_linters = {
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 0
 let g:prettier#exec_cmd_async = 1
+
+nmap gd :ALEGoToDefinition<Enter>
 
 "" Uncomment to execute prettier when saving buffers
 "let g:prettier#autoformat = 0
@@ -272,20 +281,20 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 ""
 "" Yoink
 ""
-" set shada=!,\'100,<100,s100,h
-" let g:yoinkSavePersistently = 1 "" Use the SHAred DAta (SHADA) of nvim
-" let g:yoinkMaxItems = 20
-" let g:yoinkSyncNumberedRegisters = 1
-" let g:yoinkIncludeDeleteOperations = 1
-"
-" nmap <A-p> <plug>(YoinkPostPasteSwapBack)
-" nmap <A-n> <plug>(YoinkPostPasteSwapForward)
-"
-" nmap p <plug>(YoinkPaste_p)
-" nmap P <plug>(YoinkPaste_P)
-"
-" """ Configure yank coloring timeout
-" let g:highlightedyank_highlight_duration = 220
+set shada=!,\'100,<100,s100,h
+let g:yoinkSavePersistently = 1 "" Use the SHAred DAta (SHADA) of nvim
+let g:yoinkMaxItems = 20
+let g:yoinkSyncNumberedRegisters = 1
+let g:yoinkIncludeDeleteOperations = 1
+
+nmap <A-p> <plug>(YoinkPostPasteSwapBack)
+nmap <A-n> <plug>(YoinkPostPasteSwapForward)
+
+nmap p <plug>(YoinkPaste_p)
+nmap P <plug>(YoinkPaste_P)
+
+""" Configure yank coloring timeout
+let g:highlightedyank_highlight_duration = 220
 
 """
 "" Configure Nerdcommenter
@@ -413,28 +422,6 @@ function! s:denite_my_settings() abort
   \ denite#do_map('do_action', 'split')
 endfunction
 
-""""""""""
-" COC configuration
-" Taken from https://github.com/neoclide/coc.nvim
-" TextEdit might fail if hidden is not set.
-
-" let g:coc_global_extensions = ["coc-tsserver",
-      " \ "coc-stylelint",
-      " \ "coc-json",
-      " \ "coc-python",
-      " \ "coc-prettier",
-      " \ "coc-html",
-      " \ "coc-css",
-      " \ "coc-eslint",
-      " \ "coc-yaml",
-      " \ "coc-go",
-      " \ "coc-highlight",
-      " \ "coc-snippets",
-      " \ "coc-yank",
-      " \ "coc-pairs",
-      " \ "coc-ultisnips",
-      " \ "coc-markdownlint",
-      " \ "coc-explorer"]
 "
 set hidden
 
@@ -495,7 +482,7 @@ endif
 " nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " function! s:show_documentation()
 "   if (index(['vim','help'], &filetype) >= 0)
@@ -581,6 +568,10 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " set nrformats=alpha " To increment alphabetical letters too
 " "set nrformats=alpha,octal,hex
 
+" g:AutoPairsShortcutBackInsert =
+let g:AutoPairsShortcutJump = "<S-A-n>"
+let g:AutoPairsShortcutFastWrap = "<A-e>"
+let g:AutoPairsShortcutToggle = "<S-A-p>"
 
 " *************************************
 " END PLUGIN CONFIGURATION SECTION
@@ -612,8 +603,11 @@ nmap <leader>q :nohlsearch<CR>
 
 " Show matching brackets
 set showmatch
+
 " Show line numbers
-set number
+" set number
+set number relativenumber " use relative line numbers
+
 " Continue comment marker on new lines
 set formatoptions+=o
 
@@ -627,7 +621,8 @@ set hlsearch
 set ruler
 
 filetype plugin indent on
-set omnifunc=syntaxcomplete#Complete
+" set omnifunc=syntaxcomplete#Complete "In order the use ALE
+set omnifunc=ale#completion#OmniFunc
 
 " expand tabs as spaces
 set expandtab
@@ -733,9 +728,9 @@ set pastetoggle=<F3>
 set nopaste
 
 "NERD Tree
-" nmap <leader>nt :NERDTreeToggle<CR>
+nmap <leader>et :NERDTreeToggle<CR>
 " nmap <space>e :CocCommand explorer<CR>
-nmap <leader>et :CocCommand explorer<CR>
+" nmap <leader>et :CocCommand explorer<CR>
 
 """
 """ netrw built-in explorer configured to look like nerdtree
@@ -783,7 +778,7 @@ set foldlevel=2
 
 " Format JSON text using python
 function! JsonFormat()
-:%!python -m json.tool
+:%!python3 -m json.tool
 endfunction
 command JsonFormat :call JsonFormat()
 
