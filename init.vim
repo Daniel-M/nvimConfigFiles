@@ -94,8 +94,17 @@ Plug 'jparise/vim-graphql'
 " Increment numbers sequentially in visual selection
 " Plug 'triglav/vim-visual-increment'
 
+" Improved highlighting
+Plug 'kevinhwang91/nvim-hlslens'
+
 " Multicursor like Sublime (Multiline or multiple occurences edit)
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" Integrate visual-multi with hlslens
+augroup VMlens
+ autocmd!
+ autocmd User visual_multi_start lua require('vmlens').vmlens_start()
+ autocmd User visual_multi_exit lua require('vmlens').vmlens_exit()
+augroup END
 
 " Adding more text targets to work with vim-visual-multi
 Plug 'wellle/targets.vim'
@@ -150,6 +159,9 @@ Plug 'psliwka/vim-smoothie'
 " Add plugins to &runtimepath
 call plug#end()
 
+" Register hlslens
+lua require('hlslens').setup({calm_down = true})
+
 " *************************************
 " END OF PLUGIN SECTION
 " *************************************
@@ -160,6 +172,20 @@ call plug#end()
 " *************************************
 " Set default encoding
 set encoding=UTF-8
+
+"""
+""" Configure hlslens configuration
+noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
+            \<Cmd>lua require('hlslens').start()<CR>
+noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR>
+            \<Cmd>lua require('hlslens').start()<CR>
+noremap * *<Cmd>lua require('hlslens').start()<CR>
+noremap # #<Cmd>lua require('hlslens').start()<CR>
+noremap g* g*<Cmd>lua require('hlslens').start()<CR>
+noremap g# g#<Cmd>lua require('hlslens').start()<CR>
+
+" use : instead of <Cmd>
+" nnoremap <silent> <leader>l :nohlsearch<CR>
 
 """
 " Enable indentation guides on startup (vim-indent-guides)
