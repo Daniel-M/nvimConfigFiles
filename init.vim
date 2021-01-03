@@ -100,11 +100,11 @@ Plug 'kevinhwang91/nvim-hlslens'
 " Multicursor like Sublime (Multiline or multiple occurences edit)
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " Integrate visual-multi with hlslens
-augroup VMlens
- autocmd!
- autocmd User visual_multi_start lua require('vmlens').vmlens_start()
- autocmd User visual_multi_exit lua require('vmlens').vmlens_exit()
-augroup END
+" augroup VMlens
+ " autocmd!
+ " autocmd User visual_multi_start lua require('vmlens').vmlens_start()
+ " autocmd User visual_multi_exit lua require('vmlens').vmlens_exit()
+" augroup END
 
 " Adding more text targets to work with vim-visual-multi
 Plug 'wellle/targets.vim'
