@@ -58,7 +58,7 @@ Plug 'mxw/vim-jsx'
 "Plug 'mtscout6/syntastic-local-eslint.vim'
 
 " Asynch Linter Enginge for vim/neovim
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 
 "" Javascript function parameter autocompletion engine
 " Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
@@ -84,6 +84,15 @@ Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 
 "GraphQL completion
 Plug 'jparise/vim-graphql'
+
+" Plug 'autozimu/LanguageClient-neovim', {
+    " \ 'branch': 'next',
+    " \ 'do': 'bash install.sh',
+    " \ }
+
+" (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 ""
 ""
@@ -215,50 +224,46 @@ let g:VM_maps['Find Subword Under'] = '<C-m>'
 """ Configure Deoplete
 let g:deoplete#enable_at_startup = 1
 
-call deoplete#custom#option('sources', {
-\ '_': ['ale', 'buffer'],
-\})
-
 call deoplete#custom#var('tabnine', {
 \ 'line_limit': 500,
 \ 'max_num_results': 20,
 \ })
 
-"""
-" ALE plugin configurations
+" """
+" " ALE plugin configurations
+" "
+" " Enable completion where available.
+" " This setting must be set before ALE is loaded.
+" "
+" " You should not turn this setting on if you wish to use ALE as a completion
+" " source for other completion plugins, like Deoplete.
+" let g:ale_completion_enabled = 0
+" " let g:ale_completion_autoimport = 1
+" "
+" "
+" " Enable ALE status bar messages integrated with vim-airline.
+" " Set this, Airline will handle the rest.
+" let g:airline#extensions#ale#enabled = 1
+" "
+" " Show 5 lines of errors (default: 10)
+" let g:ale_list_window_size = 5
 "
-" Enable completion where available.
-" This setting must be set before ALE is loaded.
+" " \   'javascript': ['prettier', 'eslint'],
+" let g:ale_fixers = {
+" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+" \}
 "
-" You should not turn this setting on if you wish to use ALE as a completion
-" source for other completion plugins, like Deoplete.
-let g:ale_completion_enabled = 0
-" let g:ale_completion_enabled = 1
-" let g:ale_sign_error = '>>'
-" let g:ale_sign_warning = '--'
+" let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
+"   " \ 'jsx': ['prettier', 'stylelint', 'eslint', 'jslint']
+" " let g:ale_linters = {
+"   " \ 'go': ['gopls'],
+"   " \}
+" " Set this variable to 1 to fix files when you save them.
+" let g:ale_fix_on_save = 0
+" let g:prettier#exec_cmd_async = 1
 "
-" Enable ALE status bar messages integrated with vim-airline.
-" Set this, Airline will handle the rest.
-let g:airline#extensions#ale#enabled = 1
-"
-" Show 5 lines of errors (default: 10)
-let g:ale_list_window_size = 5
+" nmap gd :ALEGoToDefinition<Enter>
 
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier', 'eslint'],
-\}
-
-let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
-let g:ale_linters = {
-	\ 'go': ['gopls'],
-  \ 'jsx': ['pretier', 'stylelint', 'eslint', 'jslint']
-	\}
-" Set this variable to 1 to fix files when you save them.
-let g:ale_fix_on_save = 0
-let g:prettier#exec_cmd_async = 1
-
-nmap gd :ALEGoToDefinition<Enter>
 
 "" Uncomment to execute prettier when saving buffers
 "let g:prettier#autoformat = 0
@@ -470,7 +475,7 @@ set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=100
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -657,8 +662,8 @@ set hlsearch
 set ruler
 
 filetype plugin indent on
-" set omnifunc=syntaxcomplete#Complete "In order the use ALE
-set omnifunc=ale#completion#OmniFunc
+" set omnifunc=syntaxcomplete#Complete
+
 
 " expand tabs as spaces
 set expandtab
@@ -701,7 +706,7 @@ set scrolloff=10
 "setlocal spell spelllang=es
 "
 "english spell checking tested and working
-"setlocal spell spelllang=en
+setlocal spell spelllang=en
 set spell spelllang=en
 
 
@@ -837,8 +842,8 @@ vmap i` c``<ESC>P
 nmap <C-b><C-d> :bd<Enter>
 
 " Set folding method by syntax
-set foldmethod=syntax
-" set foldmethod=indent
+" set foldmethod=syntax
+set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
