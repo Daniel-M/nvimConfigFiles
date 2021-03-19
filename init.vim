@@ -80,7 +80,11 @@ Plug 'zchee/deoplete-go'
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Install tabnine machine learning language completion
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+" Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+Plug 'codota/tabnine-vim'
+
+" Any jump to move to definitions
+Plug 'pechorin/any-jump.vim'
 
 "GraphQL completion
 Plug 'jparise/vim-graphql'
@@ -224,10 +228,13 @@ let g:VM_maps['Find Subword Under'] = '<C-m>'
 """ Configure Deoplete
 let g:deoplete#enable_at_startup = 1
 
-call deoplete#custom#var('tabnine', {
-\ 'line_limit': 500,
-\ 'max_num_results': 20,
-\ })
+" call deoplete#custom#var('tabnine', {
+" \ 'line_limit': 100,
+" \ 'max_num_results': 6,
+" \ })
+
+""" Configure tabnine
+set rtp+=~/tabnine-vim
 
 " """
 " " ALE plugin configurations
@@ -268,6 +275,77 @@ call deoplete#custom#var('tabnine', {
 "" Uncomment to execute prettier when saving buffers
 "let g:prettier#autoformat = 0
 "autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+"""
+" Configure any-jump
+" 
+" Show line numbers in search rusults
+let g:any_jump_list_numbers = 0
+
+" Auto search references
+let g:any_jump_references_enabled = 1
+
+" Auto group results by filename
+let g:any_jump_grouping_enabled = 0
+
+" Amount of preview lines for each search result
+let g:any_jump_preview_lines_count = 5
+
+" Max search results, other results can be opened via [a]
+let g:any_jump_max_search_results = 10
+
+" Prefered search engine: rg or ag
+let g:any_jump_search_prefered_engine = 'rg'
+
+
+" Search results list styles:
+" - 'filename_first'
+" - 'filename_last'
+let g:any_jump_results_ui_style = 'filename_first'
+
+" Any-jump window size & position options
+let g:any_jump_window_width_ratio  = 0.6
+let g:any_jump_window_height_ratio = 0.6
+let g:any_jump_window_top_offset   = 4
+
+" Customize any-jump colors with extending default color scheme:
+" let g:any_jump_colors = { "help": "Comment" }
+
+" Or override all default colors
+let g:any_jump_colors = {
+      \"plain_text":         "Comment",
+      \"preview":            "Comment",
+      \"preview_keyword":    "Operator",
+      \"heading_text":       "Function",
+      \"heading_keyword":    "Identifier",
+      \"group_text":         "Comment",
+      \"group_name":         "Function",
+      \"more_button":        "Operator",
+      \"more_explain":       "Comment",
+      \"result_line_number": "Comment",
+      \"result_text":        "Statement",
+      \"result_path":        "String",
+      \"help":               "Comment"
+      \}
+
+" Disable default any-jump keybindings (default: 0)
+let g:any_jump_disable_default_keybindings = 1
+
+" Remove comments line from search results (default: 1)
+let g:any_jump_remove_comments_from_results = 1
+
+" Custom ignore files
+" default is: ['*.tmp', '*.temp']
+let g:any_jump_ignored_files = ['*.tmp', '*.temp', '*node_modules/**']
+
+" Search references only for current file type
+" (default: false, so will find keyword in all filetypes)
+let g:any_jump_references_only_for_current_filetype = 0
+
+" Disable search engine ignore vcs untracked files
+" (default: false, search engine will ignore vcs untracked files)
+let g:any_jump_disable_vcs_ignore = 0
+
 
 """
 " Configure vim-airline
@@ -384,7 +462,9 @@ let g:NERDToggleCheckAllLines = 1
 nmap ; :Denite buffer<CR>
 nmap <leader>t :DeniteProjectDir file/rec<CR>
 nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
+" Replaced with any jump
 nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
+
 " " replace grep with ag
 " call denite#custom#var('grep', {
 "     \ 'command': ['ag'],
@@ -750,16 +830,39 @@ set termguicolors
 "
 "" syn match myTodo contained "\(TODO\|FIXME\|FIX\)"
 "highlight Todo guifg=#ffffff guibg=#0000ff
+
+
 " *************************************
 " KEYMAPPING
 " *************************************
 
+"""
+" Configuring any-jump
+"
+" Normal mode: Jump to definition under cursor
+" nnoremap <leader>j :AnyJump<CR>
+nnoremap gd :AnyJump<CR>
+" Visual mode: jump to selected text in visual mode
+" xnoremap <leader>j :AnyJumpVisual<CR>
+xnoremap gd :AnyJumpVisual<CR>
+" Normal mode: open previous opened file (after jump)
+nnoremap <leader>ab :AnyJumpBack<CR>
+" Normal mode: open last closed search window again
+nnoremap <leader>al :AnyJumpLastResults<CR>
+
+"""
+" Configuring NerdCommenter
+
 " commenting and uncommenting with NERDCommenter plugin
-nmap <C-c> <leader>cc
-nmap <C-x> <leader>cu
-vmap <C-c> <leader>cc
-" vmap <C-c> <leader>ci
-vmap <C-x> <leader>cu
+nmap <C-c> <leader>c<space>
+nmap <C-x> <leader>c<space>
+vmap <C-c> <leader>c<space>
+vmap <C-x> <leader>c<space>
+
+" nmap <C-c> <leader>cc
+" nmap <C-x> <leader>cu
+" vmap <C-c> <leader>cc
+" vmap <C-x> <leader>cu
 
 "line numbers
 nmap <leader>ln :setlocal number!<CR>
